@@ -26,7 +26,7 @@ RSpec.describe BookingController, type: :controller do
 	  		expect(controller.send(:logged_in?)).to be_falsey
 	  	end
 
-	  	it "redirects the user to the logiu page" do
+	  	it "redirects the user to the login page" do
 	  		post_new
 	  		expect(response).to redirect_to(login_page_path)
 	  	end
@@ -37,6 +37,7 @@ RSpec.describe BookingController, type: :controller do
 		before do
 			session[:user_id] = 1
 		end
+
 		context 'when user fills form new booking' do
 			it 'should save booking and redirect to your_bookings_path' do
 				post_new
@@ -59,5 +60,36 @@ RSpec.describe BookingController, type: :controller do
 				expect(response).to redirect_to(new_booking_path)
 			end
 		end
+	end
+
+	describe 'user bookings' do
+	  before do
+	  	user_ids = [1,2,1,3,4,2,3,2,1,1]
+			user_ids.each do |id|
+	  		session[:user_id] = id
+				new_booking[:flight_id] = Flight.offset(rand(Flight.count)).first
+				new_booking[:user_id] = User.find_by(:id => id)
+				post_new
+			end
+	  end
+
+	  context 'when user has made bookings' do
+	  	it "returns bookings perculiar to the user 1" do
+	  		get :index
+	  		expect(assigns(:bookings).size).to eql(4)
+	  	end
+
+	  	it "returns bookings for user 2" do
+	  		session[:user_id] = 2
+	  		get :index
+	  		expect(assigns(:bookings).size).to eql(3)
+	  	end
+
+	  	it 'returns nothing for user 4' do
+	  		session[:user_id] = 4
+	  		get :index
+	  		expect(response).to redirect_to(login_page_path)
+	  	end
+	  end
 	end
 end
