@@ -40,6 +40,7 @@ group :development, :test do
   gem 'factory_girl_rails'
   gem 'faker'
   gem 'guard-rails'
+  gem "codeclimate-test-reporter", group: :test, require: nil
 end
 
 group :development do
