@@ -46,6 +46,7 @@ group :development, :test do
   gem 'guard-rails'
   gem "codeclimate-test-reporter"
   gem 'chromedriver-helper'
+  gem 'sqlite3'
 end
 
 group :development do
