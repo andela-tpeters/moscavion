@@ -92,3 +92,9 @@ RSpec.configure do |config|
   Kernel.srand config.seed
 =end
 end
+
+SimpleCov.start do
+  add_filter "/spec/"
+  add_filter "/vendor/" # Ignores any file containing "/vendor/" in its path.
+  add_filter "/Gemfile.lock" # Ignores a specific file.
+end
