@@ -14,6 +14,8 @@ RSpec.feature "IndexPages", type: :feature do
 
 		it 'should have links' do
 			expect(page.has_link? "Contact Us").to be_truthy
+			expect(page.has_link? "About Us").to be_truthy
+			expect(page.has_link? "Help").to be_truthy
 		end
 	end
 end
