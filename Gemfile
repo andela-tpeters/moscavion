@@ -14,6 +14,7 @@ gem 'puma'
 gem 'semantic-ui-sass', github: 'doabit/semantic-ui-sass'
 
 group :development, :test do
+  gem 'pry'
   gem 'byebug'
   gem 'rspec-rails'
   gem 'capybara'
