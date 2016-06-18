@@ -19,7 +19,7 @@ group :development, :test do
   gem 'capybara'
   gem 'factory_girl_rails'
   gem 'faker'
-  gem 'guard-rspec'
+  gem 'guard-rails'
   gem "codeclimate-test-reporter"
   gem 'sqlite3'
   gem "letter_opener"
