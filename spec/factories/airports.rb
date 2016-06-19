@@ -10,4 +10,3 @@ FactoryGirl.define do
     tz_db "Europe/London"
   end
 end
-
