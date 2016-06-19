@@ -24,6 +24,7 @@ group :development, :test do
   gem "codeclimate-test-reporter"
   gem 'sqlite3'
   gem "letter_opener"
+  gem "database_cleaner"
 end
 
 group :development do
