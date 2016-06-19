@@ -41,7 +41,7 @@ RSpec.describe Airport, type: :model do
   	end
   end
 
-  describe "#instantiation errors" do
+  describe "#instantiation" do
   	it 'should raise error incomplete parameters' do
   		attributes = {:name => "Ilorin"}
   		expect { Airport.create!(attributes) }.to raise_error ActiveRecord::RecordInvalid
@@ -59,6 +59,22 @@ RSpec.describe Airport, type: :model do
   		        .to raise_error ActiveRecord::RecordInvalid
   		expect { build(:airport, :longitude => nil).save! }
   		        .to raise_error ActiveRecord::RecordInvalid
+  		expect { build(:airport, :name => "").save! }
+  		        .to raise_error ActiveRecord::RecordInvalid
+  	end
+
+  	it 'should raise error for input other than strings' do
+  		expect { create(:airport, :name => 1234) }
+  						.to raise_error ActiveRecord::RecordInvalid
+  		expect { create(:airport, :name => true) }
+  						.to raise_error ActiveRecord::RecordInvalid
+  	end
+
+  	it 'should raise error for input other than integer or floats' do
+  		expect { create(:airport, :longitude => true) }
+  						.to raise_error ActiveRecord::RecordInvalid
+  		expect { create(:airport, :latitude => "string") }
+  						.to raise_error ActiveRecord::RecordInvalid
   	end
   end
 end

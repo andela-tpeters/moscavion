@@ -255,9 +255,21 @@
         1,
         1,
         null,
+        1,
+        1,
+        null
+      ],
+      "/Users/andela/Projects/moscavion/app/validators/string_validator.rb": [
+        1,
+        1,
+        42,
+        8,
+        null,
+        null,
+        null,
         null
       ]
     },
-    "timestamp": 1466365613
+    "timestamp": 1466367411
   }
 }
