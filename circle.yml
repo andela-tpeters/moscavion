@@ -17,4 +17,4 @@ dependencies:
 ## Customize test commands
 test:
   override:
-    - CODECLIMATE_REPO_TOKEN=04c9cd32e28e2e9e0395fb83e495318d0c5c99dde219b358969049e4ff324236 bundle exec rspec # use PHPunit for testing
+    - CODECLIMATE_REPO_TOKEN=04c9cd32e28e2e9e0395fb83e495318d0c5c99dde219b358969049e4ff324236 bundle exec rspec 
