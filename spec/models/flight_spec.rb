@@ -28,9 +28,9 @@ RSpec.describe Flight, type: :model do
 						.to eql("2016-06-17 09:00:00 UTC")
 			expect(flight.arrival_date.to_s)
 						.to eql("2016-06-18 09:00:00 UTC")
-			expect(flight.airline).to eql("Sosoliso Airline")
+			expect(flight.airline_id).to eql(1)
 			expect(flight.price).to eql(250000.50)
-			expect(flight.airports_id).to eq(1)
+			expect(flight.airport_id).to eq(1)
 		end
 	end
 
@@ -45,15 +45,17 @@ RSpec.describe Flight, type: :model do
 			expect { create(:flight, departure_date: nil) }
 							.to raise_error ActiveRecord::RecordInvalid
 
-			expect { create(:flight, airports_id: nil) }
+			expect { create(:flight, airport_id: nil) }
 							.to raise_error ActiveRecord::RecordInvalid
 		end
 
 		it 'should raise ArgumentError for incomplete arguments' do
 			data = {:departure_location => "Lagos",
 							:arrival_location => "Kaduna",
-							:airports_id => 1 }
-			expect { create(data) }.to raise_error ArgumentError
+							:airport_id => 1 }
+
+			expect( Flight.new(data).save ).to be_falsey
+			expect { Flight.create!(data) }.to raise_error ActiveRecord::RecordInvalid
 		end
 
 		it 'should raise error when passed wrong datatype' do
@@ -61,10 +63,27 @@ RSpec.describe Flight, type: :model do
 							.to raise_error ActiveRecord::RecordInvalid
 			expect { create(:flight, arrival_location: 1000) }
 							.to raise_error ActiveRecord::RecordInvalid
-			expect { create(:flight, airline: 1000) }
+			expect { create(:flight, airline_id: "blue") }
 							.to raise_error ActiveRecord::RecordInvalid
-			expect { create(:flight, airports_id: "one") }
+			expect { create(:flight, airport_id: "one") }
 							.to raise_error ActiveRecord::RecordInvalid
+		end
+	end
+
+	describe 'Flight belongs to Airport ' do
+		before(:each) do
+		  @airport = build(:airport)
+		  @flight = build(:flight)
+		end
+
+		it 'accepts airport for flight' do
+		  @flight.airport = @airport
+		  expect(@flight.airport).to eq(@airport)
+		end
+
+		it 'changes airport for flight' do
+		  @flight.airport = build(:airport, :name => "Ilorin", :id => 1)
+		  expect(@flight.airport.name).to eql("Ilorin")
 		end
 	end
 end
