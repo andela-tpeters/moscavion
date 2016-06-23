@@ -77,4 +77,37 @@ RSpec.describe Airport, type: :model do
   						.to raise_error ActiveRecord::RecordInvalid
   	end
   end
+
+  describe "Airport has many Flights" do
+  	before(:all) do
+  	  @airport = build(:airport)
+	  	@flight = build(:flight, :id => 1)
+	  	@flight2 = build(:flight, :arrival_location => "Kogi", :id => 2)
+	  	@flight3 = build(:flight, :arrival_location => "Bayelsa", :id => 3)
+  	end
+
+  	after(:each) do
+  	  @airport.flights.clear
+  	end
+
+  	it 'should all flights for an airport' do
+	  	@airport.flights << @flight
+	  	@airport.flights << @flight2
+	  	@airport.flights << @flight3
+	  	expect(@airport.flights.size).to eql(3)
+  	end
+
+  	it 'should not duplicates' do
+  		@airport.flights << @flight
+  		@airport.flights << @flight
+  		expect(@airport.flights.size).to eql(1)
+  	end
+
+  	it 'should include flights saved' do
+  		@airport.flights << @flight
+	  	@airport.flights << @flight2
+	  	@airport.flights << @flight3
+  		expect(@airport.flights).to include(@flight2)
+  	end
+  end
 end
