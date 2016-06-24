@@ -36,7 +36,6 @@ RSpec.describe Booking, type: :model do
 	  end
 
 	  it 'is associated with an airport' do
-	  	binding.pry
 	  	expect(subject.flight.airport.name).to eql("Heathrow")
 	  end
 
