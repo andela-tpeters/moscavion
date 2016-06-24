@@ -11,7 +11,7 @@ RSpec.describe Flight, type: :model do
 			flight.save
 
 			expect(Flight.all.size).to eql(1)
-			flight2 = create(:flight)
+			flight2 = create(:flight, :departure_location => "Lokoja", :id => 2)
 
 			expect(Flight.all.size).to eql(2)
 			expect(Flight.all).to include(flight)
@@ -30,7 +30,6 @@ RSpec.describe Flight, type: :model do
 						.to eql("2016-06-18 09:00:00 UTC")
 			expect(flight.airline_id).to eql(1)
 			expect(flight.price).to eql(250000.50)
-			expect(flight.airport_id).to eq(1)
 		end
 	end
 
@@ -70,7 +69,7 @@ RSpec.describe Flight, type: :model do
 		end
 	end
 
-	describe 'Flight belongs to Airport ' do
+	describe 'Flight belongs to Airport' do
 		before(:each) do
 		  @airport = build(:airport)
 		  @flight = build(:flight)
