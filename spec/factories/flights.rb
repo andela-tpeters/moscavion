@@ -6,7 +6,7 @@ FactoryGirl.define do
     departure_date "2016-06-17 09:00:00"
     arrival_date "2016-06-18 09:00:00"
     airport
-    airline_id 1
+    airline
     price 250000.50
     flight_number 1
   end
