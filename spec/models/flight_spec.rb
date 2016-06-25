@@ -28,7 +28,6 @@ RSpec.describe Flight, type: :model do
 						.to eql("2016-06-17 09:00:00 UTC")
 			expect(flight.arrival_date.to_s)
 						.to eql("2016-06-18 09:00:00 UTC")
-			expect(flight.airline.id).to eql(1)
 			expect(flight.price).to eql(250000.50)
 		end
 	end

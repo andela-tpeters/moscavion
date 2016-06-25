@@ -41,12 +41,16 @@ RSpec.describe Booking, type: :model do
 
 	  it 'update associated with an airport' do
 	  	airport = Airport.create attributes_for(:airport, :name => "Kilimanjaro")
-	  	flight = Flight.create attributes_for(:flight, :departure_location => "Kogi")
+	  	airline = Airline.create attributes_for(:airline)
+	  	flight = Flight.new attributes_for(:flight, :departure_location => "Kogi")
 	  	flight.airport = airport
+	  	flight.airline = airline
+	  	flight.save
 	  	booking = Booking.new attributes_for(:booking)
 	  	booking.flight = flight
 	  	booking.save
 	  	booking = Booking.first
+
 	  	expect(booking.flight.airport.name).to eq("Kilimanjaro")
 	  	expect(booking.flight.departure_location).to eq("Kogi")
 	  end
