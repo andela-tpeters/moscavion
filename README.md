@@ -1,4 +1,4 @@
-# Moscavion [![Coverage Status](https://coveralls.io/repos/github/andela-tpeters/moscavion/badge.svg?branch=develop)](https://coveralls.io/github/andela-tpeters/moscavion?branch=develop)
+# Moscavion [![Coverage Status](https://coveralls.io/repos/github/andela-tpeters/moscavion/badge.svg?branch=develop)](https://coveralls.io/github/andela-tpeters/moscavion?branch=develop) [![Build Status](https://travis-ci.org/andela-tpeters/moscavion.svg?branch=develop)](https://travis-ci.org/andela-tpeters/moscavion)
 
 This README would normally document whatever steps are necessary to get the
 application up and running.
