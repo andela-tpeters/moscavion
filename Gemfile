@@ -22,7 +22,7 @@ group :development, :test do
   gem 'factory_girl_rails'
   gem 'faker'
   gem 'guard-rspec'
-  gem "codeclimate-test-reporter"
+  gem "coveralls", require: false
   gem 'sqlite3'
   gem "letter_opener"
   gem "database_cleaner"
