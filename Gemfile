@@ -12,6 +12,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem "pg", "~> 0.15"
 gem 'puma'
 gem 'semantic-ui-sass', github: 'doabit/semantic-ui-sass'
+gem 'bcrypt'
 
 group :development, :test do
   gem 'pry'
