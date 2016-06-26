@@ -12,6 +12,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem "pg", "~> 0.15"
 gem 'puma'
 gem 'semantic-ui-sass', github: 'doabit/semantic-ui-sass'
+gem 'bcrypt'
 
 group :development, :test do
   gem 'pry'
@@ -20,8 +21,8 @@ group :development, :test do
   gem 'capybara'
   gem 'factory_girl_rails'
   gem 'faker'
-  gem 'guard-rails'
-  gem "codeclimate-test-reporter"
+  gem 'guard-rspec'
+  gem "coveralls", require: false
   gem 'sqlite3'
   gem "letter_opener"
   gem "database_cleaner"
