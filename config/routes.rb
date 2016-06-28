@@ -5,6 +5,10 @@ Rails.application.routes.draw do
     get "/signup" => :signup
     get "/login" => :login
   end
+
+  scope controller: :flight do
+    get "/search" => :search
+  end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
