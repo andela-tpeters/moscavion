@@ -5,22 +5,22 @@ class FlightController < ApplicationController
 
 	private
 
-	# def search_params
-	# end
+	def search_params
+		params.require(:query).permit(:departure_location,:arrival_location,:passengers,:departure_date)
+	end
 
 	def prune_params
-		return params[:query] if params[:query].blank?
-		params[:query].delete_if do |key, value|
+		return search_params if search_params.blank?
+		search_params.delete_if do |key, value|
 			value.blank?
 		end
-		params[:query]
 	end
 
 	def flights
 		if prune_params.blank?
 			Flight.all
 		else
-			Flight.find_by(prune_params)
+			Flight.where(prune_params)
 		end
 	end
 end
