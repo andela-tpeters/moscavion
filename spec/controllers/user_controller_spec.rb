@@ -15,6 +15,13 @@ RSpec.describe UserController, type: :controller do
 		post :login, :user_details => user
 	end
 
+	describe '#login_params' do
+	  it "returns user_details" do
+	  	post_login
+	  	expect(controller.send(:login_params)["email"]).to be(user[:email])
+	  end
+	end
+
 	describe "login" do
 		context 'when user provide correct details' do
 			it 'saves sets a session for the user' do
