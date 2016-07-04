@@ -16,3 +16,4 @@
 !/log/.keep
 /tmp
 /coverage/*
+app/views/.DS_Store

@@ -2,17 +2,21 @@ Rails.application.routes.draw do
   root 'landing#index'
 
   scope controller: :landing do
-    get "/signup" => :signup
-    get "/login" => :login
   end
 
   scope controller: :flight do
     get "/search" => :search
   end
 
-  scope "booking", controller: :booking do
-    post "/new" => :new, as: :new_booking
-    get "/index" => :index, as: :your_bookings
+  scope "user", controller: :user do
+    post "/login" => :login
+    get "/signup" => :signup
+    get  "/login_page" => :login_page, as: :login_page
+    
+    scope "booking", controller: :booking do
+      post "/new" => :new, as: :new_booking
+      get "/index" => :index, as: :your_bookings
+    end
   end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
