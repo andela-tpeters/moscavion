@@ -6,7 +6,7 @@ RSpec.describe FlightController, type: :controller do
 								:arrival_location => nil,
 								:departure_date => nil } }
 
-	before(:all) do
+	before do
 	  load "#{Rails.root}/spec/support/seed.rb" 
   	Seed.all
 	end

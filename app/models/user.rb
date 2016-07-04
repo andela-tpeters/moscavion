@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+	has_many :bookings
 	include BCrypt
 
 	validates :first_name, :last_name, :presence => true,

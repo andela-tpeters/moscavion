@@ -48,9 +48,9 @@ RSpec.describe Booking, type: :model do
 	  	flight.save
 	  	booking = Booking.new attributes_for(:booking)
 	  	booking.flight = flight
+	  	booking.user = User.create attributes_for(:user)
 	  	booking.save
 	  	booking = Booking.first
-
 	  	expect(booking.flight.airport.name).to eq("Kilimanjaro")
 	  	expect(booking.flight.departure_location).to eq("Kogi")
 	  end
