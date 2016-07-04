@@ -58,11 +58,12 @@ class Seed
   end
 
   def self.users
-    ["peters","petros","jumbos"].each do |name|
+    email = ["peters@gmail.com", "petros@yahoo.com", "jumbos@this.com"]
+    ["peters","petros","jumbos"].each.with_index do |name, index|
       user_data = {
         :first_name => name,
         :last_name => name,
-        :email => "tijesunimi48@gmail.com",
+        :email => email[index],
         :password => "p@$$w0rd"
       }
 
