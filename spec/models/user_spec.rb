@@ -9,7 +9,7 @@ RSpec.describe User, type: :model do
 
 	  it '#saves user' do
 	  	user = create(:user)
-	  	expect(User.first.first_name).to eq("Tijesunimi")
+	  	expect(User.all).to include(user)
 	  end
 	end
 
@@ -31,7 +31,6 @@ RSpec.describe User, type: :model do
 	  it 'raises error on nil password' do
 	  	expect { create(:user, :password => nil) }
 	  				.to raise_error ActiveRecord::RecordInvalid
-	  	expect(User.all.empty?).to be_truthy
 	  end
 
 	  it 'raises error for wrong email address format' do

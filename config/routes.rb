@@ -9,6 +9,11 @@ Rails.application.routes.draw do
   scope controller: :flight do
     get "/search" => :search
   end
+
+  scope "booking", controller: :booking do
+    post "/new" => :new, as: :new_booking
+    get "/index" => :index, as: :your_bookings
+  end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

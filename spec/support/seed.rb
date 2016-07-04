@@ -57,9 +57,23 @@ class Seed
     end
   end
 
+  def self.users
+    ["peters","petros","jumbos"].each do |name|
+      user_data = {
+        :first_name => name,
+        :last_name => name,
+        :email => "tijesunimi48@gmail.com",
+        :password => "p@$$w0rd"
+      }
+
+      User.create(user_data)
+    end
+  end
+
   def self.all
     self.airports
     self.airlines
     self.flights
+    self.users
   end
 end
