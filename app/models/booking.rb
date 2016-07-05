@@ -4,7 +4,7 @@ class Booking < ActiveRecord::Base
 	belongs_to :user
 	has_many :passengers
 	validates  :price, :numericality => true, :allow_nil => false
-	validates :flight, :user, :allow_nil => false, :presence => true
+	validates :flight, :allow_nil => false, :presence => true
 	accepts_nested_attributes_for :passengers, :reject_if => :all_blank,
 																							:allow_destroy => true
 
