@@ -15,10 +15,6 @@ RSpec.describe UserController, type: :controller do
 		post :login, :user_details => user
 	end
 
-	before(:all) do
-		post_login
-	end
-
 	describe '#login_params' do
 	  it "returns user_details" do
 	  	post_login
