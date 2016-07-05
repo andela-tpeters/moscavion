@@ -92,4 +92,21 @@ RSpec.describe BookingController, type: :controller do
 	  	end
 	  end
 	end
+
+	describe 'booking <> passengers' do
+	  it 'saves passenger for booking' do
+	  	session[:user_id] = 1
+	  	new_booking[:passengers_attributes] = [{:first_name => "Tijesunimi", :last_name => "Peters", :email => "tijesunimi@gmail.com"}]
+	  	post_new
+	  	passenger = Passenger.find_by(:booking_id => 1)
+	  	expect(passenger.first_name).to eql("Tijesunimi")
+	  end
+
+	  it 'does not save passenger for booking' do
+	  	session[:user_id] = 1
+	  	new_booking[:passengers_attributes] = []
+	  	post_new
+	  	expect(Passenger.all.size).to eql(0)
+	  end
+	end
 end

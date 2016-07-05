@@ -4,7 +4,7 @@ class CreateBookings < ActiveRecord::Migration
     	t.references :flight
     	t.references :user
     	t.decimal :price, :precision => 8, :scale => 2
-    	t.integer :booking_code
+    	t.string :booking_code
 
       t.timestamps null: false
     end

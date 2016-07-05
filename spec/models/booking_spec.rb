@@ -17,14 +17,14 @@ RSpec.describe Booking, type: :model do
 	  end
 
 	  it 'creates booking object' do
-	  	expect(create(:booking).booking_code).to be(123456)
+	  	expect(create(:booking).booking_code.size).to eql(10)
 	  end
 
-	  it 'changes booking_code' do
-	  	subject.booking_code = 654321
+	  it 'updates booking_code' do
 	  	subject.save
-
-	  	booking = Booking.find_by(booking_code: 654321)
+	  	booking = Booking.find_by(:id => 1)
+	  	booking.booking_code = "654321ABCD"
+	  	booking.save
 	  	expect(booking.id).to be(1)
 	  end
 	end

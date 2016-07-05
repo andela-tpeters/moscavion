@@ -39,7 +39,7 @@ ActiveRecord::Schema.define(version: 20160626205146) do
     t.integer  "flight_id"
     t.integer  "user_id"
     t.decimal  "price",        precision: 8, scale: 2
-    t.integer  "booking_code"
+    t.string   "booking_code"
     t.datetime "created_at",                           null: false
     t.datetime "updated_at",                           null: false
   end
@@ -65,6 +65,7 @@ ActiveRecord::Schema.define(version: 20160626205146) do
     t.string   "first_name"
     t.string   "last_name"
     t.string   "email"
+    t.integer  "booking_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
