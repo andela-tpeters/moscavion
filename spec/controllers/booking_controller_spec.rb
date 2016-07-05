@@ -8,6 +8,7 @@ RSpec.describe BookingController, type: :controller do
 			:price => Faker::Commerce.price
 		} }
 
+		
 	before do
 	  load "#{Rails.root}/spec/support/seed.rb" 
   	Seed.all
@@ -18,7 +19,24 @@ RSpec.describe BookingController, type: :controller do
 		post :new, :new_booking => new_booking
 	end
 
+	describe '#session' do
+	  context 'when a user is not logged in' do
+	  	it "should return false logged_in?" do
+	  		post_new
+	  		expect(controller.send(:logged_in?)).to be_falsey
+	  	end
+
+	  	it "redirects the user to the logiu page" do
+	  		post_new
+	  		expect(response).to redirect_to(login_page_path)
+	  	end
+	  end
+	end
+
 	describe '#new' do
+		before do
+			session[:user_id] = 1
+		end
 		context 'when user fills form new booking' do
 			it 'should save booking and redirect to your_bookings_path' do
 				post_new
