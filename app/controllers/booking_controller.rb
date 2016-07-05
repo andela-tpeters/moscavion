@@ -1,9 +1,12 @@
 class BookingController < ApplicationController
-	include SessionHelper
 	before_action :check_session
 
+	def index
+		@bookings = current_user.bookings
+	end
+
 	def new
-		booking = Booking.create(booking_params)
+		booking = current_user.bookings.create(booking_params)
 		unless booking.errors.empty?
 			flash[:errors] = booking.errors.messages
 			redirect_to :back and return
@@ -13,20 +16,8 @@ class BookingController < ApplicationController
 	end
 
 	private
-
 	def booking_params
-		params.require(:new_booking).permit(
-																				:flight_id,
-																				:user_id,
-																				:price,
-																				:booking_code
-																				)
-	end
-
-	def check_session
-		unless logged_in?
-			flash[:session_error] = "Please login to continue"
-			redirect_to login_page_path
-		end
+		params.require(:new_booking).permit(:flight_id, :user_id,
+																				:price, :booking_code )
 	end
 end
