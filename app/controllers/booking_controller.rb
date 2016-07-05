@@ -1,5 +1,6 @@
 class BookingController < ApplicationController
-	# before_action :index,
+	include SessionHelper
+	before_action :check_session
 
 	def new
 		booking = Booking.create(booking_params)
@@ -20,5 +21,12 @@ class BookingController < ApplicationController
 																				:price,
 																				:booking_code
 																				)
+	end
+
+	def check_session
+		unless logged_in?
+			flash[:session_error] = "Please login to continue"
+			redirect_to login_page_path
+		end
 	end
 end
