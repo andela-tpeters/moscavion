@@ -16,11 +16,25 @@ class BookingController < ApplicationController
 		redirect_to root_path
 	end
 
+	def manage
+		# @booking = Booking.find_by(manage_params)
+	end
+
+	def search_bookings
+		@booking = Booking.find_by(search_params)
+		@passengers = @booking.passengers
+	end
+
+	def update
+		@booking.update(booking_params)
+		redirect_to manage_booking_path
+	end
+
 	private
 	def booking_params
-		params.require(:new_booking).permit(:flight_id, :user_id,
+		params.require(:booking).permit(:flight_id, :user_id,
 																				:price,
-																				passengers_attributes: [:first_name, :last_name, :email])
+																				passengers_attributes: [:id, :first_name, :last_name, :email])
 	end
 
 	def create_booking
@@ -29,5 +43,9 @@ class BookingController < ApplicationController
 		else
 			Booking.create booking_params
 		end
+	end
+
+	def search_params
+		params.require(:booking).permit(:booking_code)
 	end
 end

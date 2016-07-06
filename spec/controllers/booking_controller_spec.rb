@@ -3,19 +3,18 @@ require 'rails_helper'
 RSpec.describe BookingController, type: :controller do
 	let(:new_booking) { {
 			:flight_id => Flight.first,
-			:booking_code => Faker::Number.number(5),
 			:price => Faker::Commerce.price
 		} }
 
 		
-	before do
+	before(:all) do
 	  load "#{Rails.root}/spec/support/seed.rb" 
   	Seed.all
 	end
 
 	def post_new
 		request.env["HTTP_REFERER"] = new_booking_path
-		post :new, :new_booking => new_booking
+		post :new, :booking => new_booking
 	end
 
 	describe '#session' do
@@ -64,7 +63,7 @@ RSpec.describe BookingController, type: :controller do
 	describe 'user bookings' do
 	  before do
 	  	user_ids = [1,2,1,3,4,2,3,2,1,1]
-			user_ids.each do |id|
+			[1,2,1,3,4,2,3,2,1,1].each do |id|
 	  		session[:user_id] = id
 				new_booking[:flight_id] = Flight.offset(rand(Flight.count)).first
 				new_booking[:user_id] = User.find_by(:id => id)
@@ -108,6 +107,46 @@ RSpec.describe BookingController, type: :controller do
 	  	new_booking[:passengers_attributes] = []
 	  	post_new
 	  	expect(Passenger.all.size).to eql(0)
+	  end
+	end
+
+	describe 'manage' do
+		before do
+			new_booking[:flight_id] = Flight.offset(rand(Flight.count)).first
+			new_booking[:passengers_attributes] = [{:first_name => "Kongas",
+	  																					:last_name => "Peters",
+	  																					:email => "Konga@gmail.com"},
+	  																					{:first_name => "Bongos",
+	  																					:last_name => "Blueking",
+	  																					:email => "bongos@gmail.com"}]
+			post_new
+	  end
+	  context 'when user inputs booking code' do
+	  	let(:reservation) { Booking.last }
+	  	
+	  	it 'returns the reservation' do
+	  		post :search_bookings, :booking => {:booking_code => reservation.booking_code}
+	  		booking = assigns(:booking)
+	  		expect(booking.booking_code).to eql(reservation.booking_code)
+	  	end
+
+	  	it 'updates the passenger' do
+	  		post :search_bookings, :booking => {:booking_code => reservation.booking_code}
+	  		booking = assigns(:booking)
+	  		new_booking[:flight_id] = 30
+	  		new_booking[:booking_code] = booking.booking_code
+	  		new_booking[:price] = booking.price
+	  		new_booking[:id] = booking.id
+	  		new_booking[:passengers_attributes] = [{:first_name => "Benevolent",
+	  																					:last_name => "Peters",
+	  																					:email => "Konga@gmail.com", :id => 1,
+	  																					:booking_id => booking.id}]
+	  		post :update, :booking => new_booking
+	  		expect(response).to redirect_to(manage_booking_path)
+	  		passenger = Passenger.find_by(:id => 1)
+	  		expect(passenger.first_name).to eql("Benevolent")
+	  		expect(Passenger.all.size).to eql(2)
+	  	end
 	  end
 	end
 end

@@ -39,6 +39,10 @@ RSpec.configure do |config|
   config.before(:each, type: :feature) { DatabaseCleaner.strategy = :truncation }
   config.before(:each) { DatabaseCleaner.start }
   config.append_after(:each) { DatabaseCleaner.clean }
+  
+  config.before(:all) { DatabaseCleaner.strategy = :transaction }
+  config.before(:all) { DatabaseCleaner.start }
+  config.append_after(:all) { DatabaseCleaner.clean }
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
   # examples within a transaction, remove the following line or assign false
   # instead of true.

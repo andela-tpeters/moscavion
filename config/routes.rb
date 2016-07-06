@@ -16,6 +16,9 @@ Rails.application.routes.draw do
     scope "booking", controller: :booking do
       post "/new" => :new, as: :new_booking
       get "/index" => :index, as: :your_bookings
+      get "/manage" => :manage, as: :manage_booking
+      post "/search" => :search_bookings
+      post "/update" => :update
     end
   end
   # The priority is based upon order of creation: first created -> highest priority.
