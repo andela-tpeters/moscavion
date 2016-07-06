@@ -5,7 +5,6 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
-require "faker"
 File.open("./db/airports.dat", "r") do |file|
 	1000.times do
 		# file.each_line do |line|
@@ -47,8 +46,6 @@ File.open("./db/routes.dat", "r") do |file|
 		depart_airport = Airport.find_by(:id => line_content[3])
 		arrival_airport = Airport.find_by(:id => line_content[5])
 		airline_offset = rand(Airline.count)
-		# next if depart_airport.nil? || arrival_airport.nil?
-		# next if airline.blank?
 		flight_data = {
 			:departure_date => Faker::Date.backward(30),
 			:arrival_date => Faker::Date.forward(30),
