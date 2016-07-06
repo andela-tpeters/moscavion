@@ -5,6 +5,7 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+require "faker"
 File.open("./db/airports.dat", "r") do |file|
 	1000.times do
 		# file.each_line do |line|
