@@ -3,7 +3,6 @@ require 'rails_helper'
 RSpec.describe BookingController, type: :controller do
 	let(:new_booking) { {
 			:flight_id => Flight.first,
-			:user_id => User.first,
 			:booking_code => Faker::Number.number(5),
 			:price => Faker::Commerce.price
 		} }
@@ -28,7 +27,7 @@ RSpec.describe BookingController, type: :controller do
 
 	  	it "redirects the user to the login page" do
 	  		post_new
-	  		expect(response).to redirect_to(login_page_path)
+	  		expect(response).to redirect_to(root_path)
 	  	end
 	  end
 	end
@@ -90,6 +89,25 @@ RSpec.describe BookingController, type: :controller do
 	  		get :index
 	  		expect(response).to redirect_to(login_page_path)
 	  	end
+	  end
+	end
+
+	describe 'booking <> passengers' do
+	  it 'saves passenger for booking' do
+	  	session[:user_id] = 1
+	  	new_booking[:passengers_attributes] = [{:first_name => "Tijesunimi",
+	  																					:last_name => "Peters",
+	  																					:email => "tijesunimi@gmail.com"}]
+	  	post_new
+	  	passenger = Passenger.find_by(:booking_id => 1)
+	  	expect(passenger.first_name).to eql("Tijesunimi")
+	  end
+
+	  it 'does not save passenger for booking' do
+	  	session[:user_id] = 1
+	  	new_booking[:passengers_attributes] = []
+	  	post_new
+	  	expect(Passenger.all.size).to eql(0)
 	  end
 	end
 end
