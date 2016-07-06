@@ -13,6 +13,7 @@ gem "pg", "~> 0.15"
 gem 'puma'
 gem 'semantic-ui-sass', github: 'doabit/semantic-ui-sass'
 gem 'bcrypt'
+gem 'faker'
 
 group :development, :test do
   gem 'pry'
@@ -20,7 +21,6 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'capybara'
   gem 'factory_girl_rails'
-  gem 'faker'
   gem 'guard-rspec'
   gem "coveralls", require: false
   gem 'sqlite3'
