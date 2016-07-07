@@ -1,58 +1,10 @@
-<div class="ui secondary pointing menu">
-  <a class="active item" href="#">Home</a>
-  <a class="item" href="#">Contact Us</a>
-  <a class="item" href="#">About Us</a>
-  <div class="right menu">
-    <a class="ui item" href="#">Help</a>
-  </div>
-</div>
-<div class="ui grid middle aligned one column" style="height: 100vh">
+<%= render :partial => "header" %>
+<div class="ui grid middle aligned one column" id="map-box">
   <div class="row">
-    <div class="column eight wide centered">
-      <div class="ui three column grid">
-        <div class="column five wide centered">
-          <h1 class="ui icon header">
-          <div class="ui active large inline loader"></div>
-          <div class="content" >
-            Moscavion
-            <p class="sub header">book your flight</p>
-          </div>
-          </h1>
-        </div>
+    <div class="column twelve wide centered">
+      <div id="map">
       </div>
     </div>
   </div>
 </div>
-<div class="ui container grid">
-  <div class="row">
-    <div class="column">
-      <div id="flights_search_form_cont">
-        <form class="ui form" id="flights_search_form">
-          <div class="four fields">
-            <div class="field">
-              <label>From</label>
-              <select name="from" class="ui fluid dropdown">
-                <option value="">From</option>
-              </select>
-            </div>
-            <div class="field">
-              <label>To</label>
-              <select name="to" class="ui fluid dropdown">
-                <option value="">To</option>
-              </select>
-            </div>
-            <div class="field">
-              <label>Passengers</label>
-              <input type="text" name="passengers" placeholder="Passengers">
-            </div>
-            <div class="field">
-              <label>Departure Date</label>
-              <input type="date" name="departure_date" placeholder="departure date">
-            </div>
-          </div>
-          <button class="ui button" type="submit">Search Flight</button>
-        </form>
-      </div>
-    </div>
-  </div>
-</div>
+<%= render :partial => "footer" %>
