@@ -16,7 +16,7 @@
 }
 
 #loading {
-  background-color: white;
+  background-color: $white;
   height: 100%;
   width: 100%;
   position: fixed;
@@ -59,24 +59,24 @@
 }
 
 #footer-container {
+  bottom: 0;
   height: 100px;
-  width: 100%;
   margin: 0;
   position: absolute;
+  width: 100%;
   z-index: 2;
-  bottom: 0;
 }
 
 #logo {
   h1 {
+    color: rgba(166, 134, 106, 0.5);
     font-family: $fruktur;
     font-size: 40px;
-    color: rgba(166, 134, 106, 0.5);
   }
 }
 
 #map {
-  background-color: white;
+  background-color: $white;
   height: 33em;
   width: 100%;
 }
@@ -109,10 +109,10 @@
 }
 
 .airports {
-  fill: rgba(140, 39, 39, 1);
-  stroke-width: 0.5px;
+  fill: $airport-color;
   stroke-linecap: round;
   stroke-linejoin: round;
+  stroke-width: 0.5px;
   vector-effect: non-scaling-stroke;
 }
 
@@ -140,7 +140,7 @@
 .ui.basic.m-button.buttons .button:focus,
 .ui.basic.m-button.button:focus {
   background-color: $main-color !important;
-  color: white !important;
+  color: $white !important;
 }
 
 .m-phrase {
@@ -151,12 +151,12 @@
 
   .name {
     font-size: 50px;
+    font-weight: 400px;
     line-height: 0.7;
     opacity: 0.8;
-    font-weight: 400px;
   }
 }
 
 .white {
-  color: #fff;
+  color: $white;
 }
