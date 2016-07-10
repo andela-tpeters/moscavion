@@ -66,7 +66,8 @@ var paginate = function(page = 1, data = flights) {
 }
 
 var booking_button = function(id) {
-    var button = "<a href='#" + id + "' class='ui basic button m-button'><i class='book icon'></i>Book</a>";
+    var path = "/user/booking/book/" + id;
+    var button = "<a href='"+ path +"' class='ui basic button m-button'><i class='book icon'></i>Book</a>";
     return button;
 }
 

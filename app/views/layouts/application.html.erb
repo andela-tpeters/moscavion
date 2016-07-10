@@ -7,7 +7,7 @@
 		<%= csrf_meta_tags %>
 	</head>
 	<body class="<%= controller_name %> <%= action_name %>">
-
+		<%= render :partial => "landing/header" %>
 		<% if flash[:session_error] %>
 		<%= flash[:session_error] %>
 		<% end %>
@@ -20,6 +20,7 @@
 		<%= render :partial => "landing/preloader" %>
 		<%= render :partial => "landing/flight_search_modal" %>
 		<%= yield %>
+		<%= render :partial => "landing/footer" %>
 		<script src="//d3js.org/d3.v3.min.js"></script>
 		<script src="//d3js.org/topojson.v1.min.js"></script>
 		<script src="//d3js.org/queue.v1.min.js"></script>

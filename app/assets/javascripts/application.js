@@ -11,11 +11,11 @@
 // about supported directives.
 //
 //= require jquery
-//= require jquery.turbolinks
+// require jquery.turbolinks
 //= require jquery_ujs
-//= require turbolinks
 
 //= require semantic-ui
 //= require_tree .
 
+// require turbolinks
 

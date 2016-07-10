@@ -16,6 +16,10 @@ class BookingController < ApplicationController
 		redirect_to root_path
 	end
 
+	def create
+		@flight = Flight.find_by(:id => params[:flight_id])
+	end
+
 	def manage
 		# @booking = Booking.find_by(manage_params)
 	end

@@ -151,8 +151,8 @@ $(function () {
         i++;
       }, 1500);
   }
-  queue().defer(d3.json, "countries.topo.json" )
-         .defer(d3.json, "airports.topo.json")
+  queue().defer(d3.json, "<%= asset_path 'countries.topo.json' %>" )
+         .defer(d3.json, "<%= asset_path 'airports.topo.json' %>")
          .await(loaded);
          
 
