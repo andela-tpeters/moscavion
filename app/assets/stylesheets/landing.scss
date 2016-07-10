@@ -43,12 +43,14 @@
 
 #map-box {
   height: 100vh;
+
   .content-wrapper {
     position: relative;
+    
     .content-container {
+      left: 0;
       position: absolute;
       top: 0;
-      left: 0;
       width: 100%;
       height: 100%;
       background-color: rgba(0, 0, 0, 0.3);
@@ -81,6 +83,7 @@
 
 .my_c {
   position: relative;
+
   .form-cont {
     position: absolute;
     top: 0;
@@ -93,11 +96,11 @@
 }
 
 .countries {
-  fill: rgba(217, 198, 176, 1);
+  fill: $countries-color;
   stroke: $brown;
-  stroke-width: 0.5px;
   stroke-linecap: round;
   stroke-linejoin: round;
+  stroke-width: 0.5px;
   vector-effect: non-scaling-stroke;
 }
 
