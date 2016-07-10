@@ -66,7 +66,7 @@ var paginate = function(page = 1, data = flights) {
 }
 
 var booking_button = function(id) {
-    var button = "<a href='#" + id + "' class='ui basic button m_button'><i class='book icon'></i>Book</a>";
+    var button = "<a href='#" + id + "' class='ui basic button m-button'><i class='book icon'></i>Book</a>";
     return button;
 }
 
@@ -88,9 +88,3 @@ var slice_word = function(word) {
 var table_cell = function(value) {
     return "<td>" + value + "</td>";
 }
-
-// $(document).on("mouseover", "#help_icon", function() {
-    // console.log(this.attr("id"));
-    
-
-// });
