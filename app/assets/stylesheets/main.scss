@@ -1,4 +1,10 @@
 @import "config/variables";
+
+@font-face {
+	font-family: logo;
+	src: url("Economica_Std.ttf");
+}
+
 body {
 	font-family: $main-font !important;
 }

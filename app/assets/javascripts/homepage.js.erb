@@ -149,7 +149,7 @@ $(function () {
         var od = OD_PAIRS[i];
         fly(od[0], od[1]);
         i++;
-      }, 500);
+      }, 1500);
   }
   queue().defer(d3.json, "countries.topo.json" )
          .defer(d3.json, "airports.topo.json")
