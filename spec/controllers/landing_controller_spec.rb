@@ -14,7 +14,6 @@ RSpec.describe LandingController, type: :controller do
 
 	  it 'displays the right content' do
 	  	expect(response.body).to include("Moscavion")
-	  	expect(response.body).to include("flights_search_form")
 	  end
 	end
 end

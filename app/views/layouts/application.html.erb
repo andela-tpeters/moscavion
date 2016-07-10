@@ -1,23 +1,27 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Moscavion</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
-<% if flash[:session_error] %>
-    <%= flash[:session_error] %>
-<% end %>
-<% if flash[:notice] %>
-    <%= flash[:notice] %>
-<% end %>
-<% if flash[:error] %>
-    <%= flash[:error] %>
-<% end %>
+	<head>
+		<title>Moscavion</title>
+		<%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+		<%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+		<%= csrf_meta_tags %>
+	</head>
+	<body class="<%= controller_name %> <%= action_name %>">
 
-<%= yield %>
-
-</body>
+		<% if flash[:session_error] %>
+		<%= flash[:session_error] %>
+		<% end %>
+		<% if flash[:notice] %>
+		<%= flash[:notice] %>
+		<% end %>
+		<% if flash[:error] %>
+		<%= flash[:error] %>
+		<% end %>
+		<%= render :partial => "landing/preloader" %>
+		<%= render :partial => "landing/flight_search_modal" %>
+		<%= yield %>
+		<script src="//d3js.org/d3.v3.min.js"></script>
+		<script src="//d3js.org/topojson.v1.min.js"></script>
+		<script src="//d3js.org/queue.v1.min.js"></script>
+	</body>
 </html>

@@ -17,7 +17,7 @@ Rails.application.routes.draw do
       post "/new" => :new, as: :new_booking
       get "/index" => :index, as: :your_bookings
       get "/manage" => :manage, as: :manage_booking
-      post "/search" => :search_bookings
+      post "/search" => :search_bookings, as: :search_bookings
       post "/update" => :update
     end
   end

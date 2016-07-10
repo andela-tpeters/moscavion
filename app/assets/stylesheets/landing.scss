@@ -1,3 +1,162 @@
 // Place all the styles related to the landing controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+@import "config/variables";
+.brown {
+  color: $brown;
+}
+
+#header-container {
+  height: 140px;
+  width: 100%;
+  margin: 0;
+  position: absolute;
+  z-index: 2;
+  top: 0;
+}
+
+#loading {
+  background-color: $white;
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  z-index: 1000;
+  margin-top: 0px;
+  top: 0px;
+}
+
+#loading-center {
+  height: 100%;
+  position: relative;
+  width: 100%;
+}
+
+#loading-center-absolute {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  height: 200px;
+  width: 200px;
+  margin-top: -100px;
+  margin-left: -100px;
+}
+
+#map-box {
+  height: 100vh;
+
+  .content-wrapper {
+    position: relative;
+
+    .content-container {
+      left: 0;
+      position: absolute;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.3);
+    }
+  }
+}
+
+#footer-container {
+  bottom: 0;
+  height: 100px;
+  margin: 0;
+  position: absolute;
+  width: 100%;
+  z-index: 2;
+}
+
+#logo {
+  h1 {
+    color: rgba(166, 134, 106, 0.5);
+    font-family: $fruktur;
+    font-size: 40px;
+  }
+}
+
+#map {
+  background-color: $white;
+  height: 33em;
+  width: 100%;
+}
+
+.logo-side {
+  position: relative;
+}
+
+.countries {
+  fill: $countries-color;
+  stroke: $brown;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 0.5px;
+  vector-effect: non-scaling-stroke;
+}
+
+.my-link {
+  color: $my-link;
+  font-size: 12px;
+  text-transform: uppercase;
+}
+
+.my-link:hover {
+  color: $my-link-hover;
+}
+
+.footer-text-color {
+  color: $brown-5;
+}
+
+.airports {
+  fill: $airport-color;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 0.5px;
+  vector-effect: non-scaling-stroke;
+}
+
+.route {
+  fill: transparent;
+}
+
+.plane {
+  fill: $brown;
+}
+
+.fullheight {
+  height: 100%;
+}
+
+.ui.basic.m-button.buttons .button,
+.ui.basic.m-button.button {
+  box-shadow: 0 0 0 1px $main-color inset !important;
+  color: $main-color !important;
+  font-family: $main-font;
+}
+
+.ui.basic.m-button.buttons .button:hover,
+.ui.basic.m-button.button:hover,
+.ui.basic.m-button.buttons .button:focus,
+.ui.basic.m-button.button:focus {
+  background-color: $main-color !important;
+  color: $white !important;
+}
+
+.m-phrase {
+  .phrase {
+    font-size: 16px;
+    line-height: 2;
+  }
+
+  .name {
+    font-size: 50px;
+    font-weight: 400px;
+    line-height: 0.7;
+    opacity: 0.8;
+  }
+}
+
+.white {
+  color: $white;
+}
