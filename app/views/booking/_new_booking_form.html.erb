@@ -1,0 +1,20 @@
+<%= form_for @booking, :url => new_booking_path,
+												html: {
+																:onchange => "disableSubmit()",
+																:class => "ui form",
+																:name => "new-booking-form",
+																:id => "new-booking-form"
+															} do |f| %>
+<%= f.hidden_field :flight_id, value: @flight.id %>
+<%= f.hidden_field :price, value: @flight.price %>
+<%= f.fields_for :passengers do |p| %>
+<%= render partial: "passenger_fields", f: p %>
+<% end %>
+<div class="field">
+	<%= link_to_add_association f, :passengers, :class => "ui brown basic bottom right attached label" do %>
+	<i class="user add icon"></i> Add Passenger
+	<% end %>
+</div>
+<%= f.submit "Submit", :class => "ui basic m-button button disabled large submit-button" %>
+<button type="button" class="ui button teal" onclick="confirmation()">Confirm Info</button>
+<% end %>

@@ -8,7 +8,7 @@ class BookingController < ApplicationController
 	def new
 		booking = create_booking
 		unless booking.errors.empty?
-			flash[:errors] = booking.errors.messages
+			flash[:errors] = booking.errors.full_messages
 			redirect_to :back and return
 		end
 		flash[:notice] = "Booking Successful"
@@ -18,6 +18,7 @@ class BookingController < ApplicationController
 
 	def create
 		@flight = Flight.find_by(:id => params[:flight_id])
+		@booking = Booking.new
 	end
 
 	def manage
@@ -38,7 +39,9 @@ class BookingController < ApplicationController
 	def booking_params
 		params.require(:booking).permit(:flight_id, :user_id,
 																				:price,
-																				passengers_attributes: [:id, :first_name, :last_name, :email])
+																				passengers_attributes: [
+																					:id, :first_name,
+																					:last_name, :email, :_destroy])
 	end
 
 	def create_booking

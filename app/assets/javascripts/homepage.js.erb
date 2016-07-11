@@ -86,7 +86,6 @@ $(function () {
 
   function delta(path) {
     var l = path.getTotalLength();
-    console.log(path)
     return function(i) {
       return function(t) {
         var p = path.getPointAtLength(t * l);

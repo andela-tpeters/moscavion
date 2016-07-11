@@ -15,6 +15,7 @@
 //= require jquery_ujs
 
 //= require semantic-ui
+//= require cocoon
 //= require_tree .
 
 // require turbolinks

@@ -1,43 +1,15 @@
-<div class="center aligned grid ui sixteen wide" style="">
+<div class="center aligned grid ui sixteen wide">
 	<div class="row">
-		<div class="ui middle aligned grid" style="height: 100vh; width: 70%">
-			<div class="eight wide column" style="">
+		<div class="ui middle aligned grid stackable booking-main-container">
+			<div class="eight wide column">
 				<div class="">
 					<div class="ui center aligned grid">
-						<div class="">
+						<div class="fullwidth">
 							<div class="ui segment">
-								<a class="ui brown ribbon label"><i class='info icon'></i>Overview</a>
+								<a class="ui grey ribbon label"><i class='info icon'></i>Overview</a>
 								<h3><i class="plane icon"></i>Flight Details</h3>
 								<p></p>
-								<table class="ui celled stripped table" style="">
-									<thead>
-										<tr>
-											<th>Description</th>
-											<th>Details</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr>
-											<td><i class="calendar brown icon"></i> Departure Date</td>
-											<td><%= @flight.departure_date.strftime("%d, %B %Y @ %H:%M:%S") %></td>
-										</tr>
-										<tr>
-											<td><i class="calendar brown icon"></i> Arrival Date</td>
-											<td><%= @flight.arrival_date.strftime("%d, %B %Y @ %H:%M:%S") %></td>
-										</tr>
-										<tr>
-											<td><i class="marker brown icon"></i> Departure Location</td>
-											<td><%= @flight.departure_location %></td>
-										</tr>
-										<tr>
-											<td><i class="location brown arrow icon"></i> Arrival Location</td>
-											<td><%= @flight.arrival_location %></td>
-										</tr>
-										<tr><td><i class="plane brown icon"></i> Airline</td><td><%= @flight.airline.name %></td></tr>
-										<tr><td><i class="money brown icon"></i> Price</td><td><button class="ui brown tag label"><i class="dollar icon"></i><%= @flight.price %></button></td></tr>
-										
-									</tbody>
-								</table>
+								<%= render :partial => "flight_description_table" %>
 							</div>
 						</div>
 					</div>
@@ -46,11 +18,30 @@
 			<div class="eight wide column">
 				<div>
 					<div class="ui center aligned grid">
-						<div class="">
+						<div class="fullwidth">
 							<div class="ui segment">
-								<a class="ui brown ribbon label"><i class='book icon'></i>Passengers Information</a>
-								<h3><i class="user icon"></i>Details</h3>
-								<p></p>
+								<a class="ui grey ribbon right label"><i class='book icon'></i>Passengers Information</a>
+								<div style="">
+									<p>
+										<% if flash[:errors] %>
+										<div class="ui error small message transition">
+											<i class="close icon"></i>
+											<div class="header">Error(s): </div>
+											<ul>
+												<% flash[:errors].each do |msg| %>
+												<li><%= msg %></li>
+												<% end %>
+											</ul>
+										</div>
+										<% end %>
+										<% if flash[:notice] %>
+										<div class="ui positive small message transition">
+											<%= flash[:notice] %>
+										</div>
+										<% end %>
+									</p>
+									<%= render :partial => "new_booking_form" %>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -59,3 +50,11 @@
 		</div>
 	</div>
 </div>
+<%= render :partial => "confirmation_modal" %>
+<script type="text/javascript">
+	var calcPrice = function(number) {
+
+	}
+	var k = <%= @flight.price * 3 %>
+	// console.log(k);
+</script>

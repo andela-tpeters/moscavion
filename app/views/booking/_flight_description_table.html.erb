@@ -1,0 +1,23 @@
+<table class="ui celled stripped table" style="">
+	<thead>
+		<tr>
+			<th>Description</th>
+			<th>Details</th>
+		</tr>
+	</thead>
+	<tbody>
+		<%= flight_row "Departure Date", "calendar", format_date(@flight.departure_date) %>
+		<%= flight_row "Arrival Date", "calendar", format_date(@flight.arrival_date) %>
+		<%= flight_row "Departure Location", "marker", @flight.departure_location %>
+		<%= flight_row "Arrival Location", "location arrow", @flight.arrival_location %>
+		<%= flight_row "Airline", "plane", @flight.airline.name %>
+		<tr>
+			<td><i class="money brown icon"></i> Price</td>
+			<td>
+				<button class="ui brown tag label">
+				<i class="dollar icon"></i><span id="flight-price"><%= @flight.price %></span>
+				</button>
+			</td>
+		</tr>
+	</tbody>
+</table>

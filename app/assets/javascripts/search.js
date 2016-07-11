@@ -1,7 +1,8 @@
 var db = localStorageDB("flight_db");
 var flights;
 var current_page = 1;
-$(document).on("click", "#search_flight", function() {
+
+var searchFlight = function() {
     var form_data = form_obj($("#search_flight_form").serializeArray());
     var def = $.Deferred();
     var result = "";
@@ -13,7 +14,7 @@ $(document).on("click", "#search_flight", function() {
     $("#result_count").html(flights.length);
     paginate(1, flights);
     $(".ui.modal").modal("show");
-});
+};
 
 var paginate = function(page = 1, data = flights) {
     if (current_page == 0) {
