@@ -11,7 +11,7 @@
   <div class="field">
     <select class="ui fluid dropdown" name="query[arrival_location]">
       <option value="">Arrival</option>
-      <%=render :partial => "options_arrivals", :collection => @arrivals, as: :arrivals %>
+      <%= render :partial => "options_arrivals", :collection => @arrivals, as: :arrivals %>
     </select>
   </div>
 </div>

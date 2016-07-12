@@ -4,7 +4,6 @@ var current_page = 1;
 
 var searchFlight = function() {
     var form_data = form_obj($("#search_flight_form").serializeArray());
-    var def = $.Deferred();
     var result = "";
     if ($.isEmptyObject(form_data)) {
         flights = db.queryAll("flights");
@@ -13,10 +12,12 @@ var searchFlight = function() {
     }
     $("#result_count").html(flights.length);
     paginate(1, flights);
-    $(".ui.modal").modal("show");
+    $(".ui.modal.flight-search-modal").modal("show");
 };
 
-var paginate = function(page = 1, data = flights) {
+var paginate = function(page, data) {
+    page = page || 1;
+    data = data || flights;
     if (current_page == 0) {
         current_page = 1;
     } else {
@@ -32,23 +33,17 @@ var paginate = function(page = 1, data = flights) {
 
     if (page > 1) {
         pagin.append(function() {
-            var link = "";
-            link += "<a class='item p-link' onclick='paginate(" + (current_page - 1) + ");'>\
-                  Previous</a>";
-            return link;
+            return "<a class='item p-link' onclick='paginate(" + (current_page - 1) + ");'>Previous</a>";
         });
     }
     if (limit < data.length) {
         pagin.append(function() {
-            var link = "";
-            link += "<a class='item p-link' onclick='paginate(" + (current_page + 1) + ");'>\
-                  Next</a>";
-            return link;
+            return "<a class='item p-link' onclick='paginate(" + (current_page + 1) + ");'>Next</a>";
         });
     }
 
     $("#flights_results > table > tbody").empty();
-    for (var i = offset; i < limit; i++) {
+    for (var i = offset; i < limit; i+=1) {
         var flight_data = "";
         if (!$.isEmptyObject(data[i])) {
             $("#flights_results > table > tbody").append(function() {
@@ -61,16 +56,14 @@ var paginate = function(page = 1, data = flights) {
                 return "<tr>" + flight_data + "</tr>";
             });
         }
-    };
-
-
-}
+    }
+};
 
 var booking_button = function(id) {
     var path = "/user/booking/book/" + id;
     var button = "<a href='"+ path +"' class='ui basic button m-button'><i class='book icon'></i>Book</a>";
     return button;
-}
+};
 
 var form_obj = function(data) {
     var output = {};
@@ -81,12 +74,12 @@ var form_obj = function(data) {
         }
     }
     return output;
-}
+};
 
 var slice_word = function(word) {
     return word.slice(6, -1);
-}
+};
 
 var table_cell = function(value) {
     return "<td>" + value + "</td>";
-}
+};

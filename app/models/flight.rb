@@ -1,6 +1,7 @@
 class Flight < ActiveRecord::Base
 	belongs_to :airport
 	belongs_to :airline
+	has_many 	:bookings
 	validates :departure_location,
 						:arrival_location,
 						:presence => true, :allow_nil => false, :string => true

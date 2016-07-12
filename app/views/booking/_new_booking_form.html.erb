@@ -5,8 +5,8 @@
 																:name => "new-booking-form",
 																:id => "new-booking-form"
 															} do |f| %>
-<%= f.hidden_field :flight_id, value: @flight.id %>
-<%= f.hidden_field :price, value: @flight.price %>
+<%= f.hidden_field :flight_id %>
+<%= f.hidden_field :price %>
 <%= f.fields_for :passengers do |p| %>
 <%= render partial: "passenger_fields", f: p %>
 <% end %>

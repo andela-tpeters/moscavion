@@ -14,7 +14,6 @@ gem 'puma'
 gem 'semantic-ui-sass', github: 'doabit/semantic-ui-sass'
 gem 'bcrypt'
 gem 'faker'
-gem 'jquery-turbolinks'
 gem 'cocoon'
 
 group :development, :test do

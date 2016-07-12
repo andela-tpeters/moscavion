@@ -13,7 +13,6 @@ var confirmation = function() {
             var name = inputs[0].value + " " + inputs[1].value;
             return name;
         });
-        console.dir(header);
         content.append(header);
         content.append(inputs[2].value);
         item.append(content);
