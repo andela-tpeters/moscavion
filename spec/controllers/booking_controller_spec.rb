@@ -16,7 +16,7 @@ RSpec.describe BookingController, type: :controller do
 	end
 
 	def post_new
-		request.env["HTTP_REFERER"] = new_booking_path
+		request.env["HTTP_REFERER"] = "new_booking_path"
 		post :new, :booking => new_booking
 	end
 
@@ -54,7 +54,7 @@ RSpec.describe BookingController, type: :controller do
 			it 'raise error' do
 				new_booking[:flight_id] = nil
 				post_new
-				expect(response).to redirect_to(new_booking_path)
+				expect(response).to redirect_to(request.env["HTTP_REFERER"])
 			end
 		end
 	end

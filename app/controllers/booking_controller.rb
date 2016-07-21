@@ -13,10 +13,8 @@ class BookingController < ApplicationController
       flash[:errors] = booking.errors.full_messages
       redirect_to :back and return
     end
-    send_mail booking
     flash[:notice] = "Booking Successful"
-    redirect_to your_bookings_path and return if logged_in?
-    redirect_to root_path
+    send_mail booking
   end
 
   def create
@@ -73,10 +71,12 @@ class BookingController < ApplicationController
   def send_mail(booking)
     if logged_in? && current_user
       BookingMailer.successful_booking(booking, current_user).deliver_later
+      redirect_to your_bookings_path and return
     else
       booking.passengers.each do |p|
         BookingMailer.successful_booking(booking, p).deliver_later
       end
+      redirect_to root_path and return
     end
   end
 
