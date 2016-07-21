@@ -9,12 +9,13 @@ class BookingController < ApplicationController
 
   def new
     booking = create_booking
-    unless booking.errors.empty?
+    if booking.errors.empty?
+      flash[:notice] = "Booking Successful"
+      send_mail booking and return true
+    else
       flash[:errors] = booking.errors.full_messages
       redirect_to :back and return
     end
-    flash[:notice] = "Booking Successful"
-    send_mail booking
   end
 
   def create
@@ -35,10 +36,9 @@ class BookingController < ApplicationController
 
   def update
     if booking.update(booking_params)
-      send_mail booking
       flash[:notice] = "Booking Updated Successfully"
     end
-    redirect_to :back
+    send_mail booking
   end
 
   def delete
