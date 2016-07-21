@@ -39,26 +39,20 @@ RSpec.describe UserController, type: :controller do
 				user["password"] = ""
 				post_login
 				expect(session["flash"]["flashes"]["error"])
-							.to eql("Your email or password is not correct")
-				expect(response).to redirect_to(login_page_path)
+							.to eql("User details cannot be empty")
+				expect(response).to redirect_to(request.env["HTTP_REFERER"])
 			end
 		end
 	end
 
-	describe "GET signup page" do
+	describe "POST signup page" do
 		it 'routes to the signup page' do
-			get :signup
-			expect(response).to render_template("signup")
-			expect(response.body).to include("Register")
-			expect(response.body).to include("signup-form")
-		end
-	end
-
-	describe 'GET login' do
-		it 'routes to the login page' do
-		  get :login_page
-		  expect(response).to render_template('login_page')
-		  expect(response.body).to include('Login')
+			request.env["HTTP_REFERER"] = "where_i_am_coming_from"
+			post :signup, user: { first_name: "Tijesunimi", last_name: "Petros",
+														email: "tijesunimi48@gmail.com", password: "petros",
+														password_confirm: "petros"}
+			expect(response.body).to redirect_to(request.env["HTTP_REFERER"])
+			expect(User.last.first_name).to eql("Tijesunimi")
 		end
 	end
 end

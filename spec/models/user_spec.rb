@@ -1,18 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-	describe '#instantiation' do
-	  it 'builds user object' do
-	  	user = build(:user)
-	  	expect(user).to be_kind_of(User)
-	  end
-
-	  it '#saves user' do
-	  	user = create(:user)
-	  	expect(User.all).to include(user)
-	  end
-	end
-
 	describe 'validations for new users' do
 	  it 'raises error for input < 6 characters' do
 	  	expect { create(:user, :first_name => "Toms") }
