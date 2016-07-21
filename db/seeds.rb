@@ -47,8 +47,8 @@ File.open("./db/routes.dat", "r") do |file|
 		arrival_airport = Airport.find_by(:id => line_content[5])
 		airline_offset = rand(Airline.count)
 		flight_data = {
-			:departure_date => Faker::Date.backward(30),
-			:arrival_date => Faker::Date.forward(30),
+			:departure_date => Faker::Time.between(2.days.ago, Date.today, :all),
+			:arrival_date => Faker::Time.forward(1),
 			:airport => Airport.offset(offset).first,
 			:airline => Airline.offset(airline_offset).first,
 			:flight_number => Faker::Number.number(6),

@@ -19,9 +19,9 @@ class FlightController < ApplicationController
 
 	def flights
 		if prune_params.blank?
-			Flight.all
+			Flight.where("departure_date > ?", Time.now)
 		else
-			Flight.where(prune_params)
+			Flight.where(prune_params).where("departure_date > ?", Time.now)
 		end
 	end
 end

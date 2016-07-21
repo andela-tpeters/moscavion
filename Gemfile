@@ -15,6 +15,7 @@ gem 'semantic-ui-sass', github: 'doabit/semantic-ui-sass'
 gem 'bcrypt'
 gem 'faker'
 gem 'cocoon'
+gem 'will_paginate', '~> 3.1.0'
 
 group :development, :test do
   gem 'pry'
@@ -27,6 +28,8 @@ group :development, :test do
   gem 'sqlite3'
   gem "letter_opener"
   gem "database_cleaner"
+  gem 'chromedriver-helper'
+  gem 'selenium-webdriver'
 end
 
 group :development do
