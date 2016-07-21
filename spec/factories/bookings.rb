@@ -3,5 +3,7 @@ FactoryGirl.define do
   	user
     price 25000.00
     flight
+    passengers_attributes [{first_name: "Petros", last_name: "Petros",
+    						email: 'petros@petros.com'}]
   end
 end

@@ -1,14 +1,14 @@
 require 'rails_helper'
 
 RSpec.describe Booking, type: :model do
-	describe '#instantiation' do
+	describe 'instantiation' do
 	  it 'returns booking object' do
 	  	booking = build(:booking)
 	  	expect(booking).to be_kind_of(Booking)
 	  end
 	end
 
-	describe '#save' do
+	describe 'save' do
 		subject { build(:booking) } 
 	  it 'saves booking object' do
 	  	subject.save
@@ -53,18 +53,6 @@ RSpec.describe Booking, type: :model do
 	  	booking = Booking.first
 	  	expect(booking.flight.airport.name).to eq("Kilimanjaro")
 	  	expect(booking.flight.departure_location).to eq("Kogi")
-	  end
-	end
-
-	describe '#instantiation errors' do
-	  it 'raises error if string is passed to prices' do
-	  	expect { create(:booking, :price => "twenty") }
-	  					.to raise_error ActiveRecord::RecordInvalid
-	  end
-
-	  it 'raises error if input is nil' do
-	  	expect { create(:booking, :price => nil) }
-	  					.to raise_error ActiveRecord::RecordInvalid
 	  end
 	end
 end
