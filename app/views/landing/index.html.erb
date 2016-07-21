@@ -1,37 +1,33 @@
-<div class="ui grid middle aligned one column" id="map-box">
-  <div class="row">
-    <div class="column twelve wide centered content-wrapper">
-      <div id="map"></div>
-      <div class="content-container">
-        <div class="ui stackable grid middle aligned fullheight">
-          <div class="row">
-            <div class="eight wide column">
-              <div class="ui grid center aligned">
-                <div class="white">
-                  <div class="ui sixteen column grid">
-                    <div class="m-phrase">
-                    <span class="phrase">Book your flight....</span><br />
-                    <span class="name">
-                      <i class="angle double right icon"></i>
-                      Moscavion
-                      <i class="angle double left icon"></i>
-                    </span>
-                  </div>
+<div class="ui one column grid">
+  <div id="map"></div>
+  <div class="content-container">
+    <div class="ui stackable grid middle aligned fullheight">
+      <div class="row">
+        <div class="eight wide column">
+          <div class="ui grid center aligned">
+            <div class="white">
+              <div class="ui sixteen column grid">
+                <div class="m-phrase">
+                  <span class="phrase">Book your flight....</span><br />
+                  <span class="name">
+                    <i class="angle double right icon"></i>
+                    Moscavion
+                    <i class="angle double left icon"></i>
+                  </span>
                 </div>
               </div>
             </div>
           </div>
-          <div class="eight wide column">
-            <div class="ui grid center aligned">
-              <div class="">
-                <%= render :partial => "flight_form" %>
-              </div>
+        </div>
+        <div class="eight wide column">
+          <div class="ui grid center aligned">
+            <div class="">
+              <%= render :partial => "flight_form" %>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-  
 </div>
-</div>
+<%#= render :partial => "landing/flight_search_modal" %>

@@ -8,19 +8,27 @@
 	</head>
 	<body class="<%= controller_name %> <%= action_name %>">
 		<%= render :partial => "landing/header" %>
-		<% if flash[:session_error] %>
-		<%= flash[:session_error] %>
-		<% end %>
-		<% if flash[:notice] %>
-		<%= flash[:notice] %>
-		<% end %>
-		<% if flash[:error] %>
-		<%= flash[:error] %>
-		<% end %>
-		<%= render :partial => "landing/preloader" %>
-		<%= render :partial => "landing/flight_search_modal" %>
-		<%= yield %>
+		<div class="center aligned grid ui sixteen wide">
+			<div class="row">
+				<div class="ui grid fullwidth" id="map-box">
+				<%= login_msg %>
+				<%= error_msg %>
+				<%= notice %>
+					<div class="row">
+						<div class="column twelve wide centered content-wrapper">
+							<%= yield %>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
 		<%= render :partial => "landing/footer" %>
+		<%= render :partial => "landing/preloader" %>
+		<%= render :partial => "user/login_page" %>
+		<%= render partial: "user/signup" %>
+		<%= render :partial => "booking/search_booking_form" %>
+		<%= render :partial => "landing/flight_search_modal" %>
 		<script src="//d3js.org/d3.v3.min.js"></script>
 		<script src="//d3js.org/topojson.v1.min.js"></script>
 		<script src="//d3js.org/queue.v1.min.js"></script>
