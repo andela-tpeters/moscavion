@@ -1,0 +1,28 @@
+Booking was successfull.
+=========================================================================
+
+You have successfully booked for your flight.
+
+Booking Details
+=========================================================================
+
+Booking id: <%= @booking.booking_code %>
+
+Airline: <%= @flight.airline.name %>, Flight Number: <%= @flight.flight_number %>
+
+Departure airport: <%= @flight.departure_location %>, <%= @flight.departure_date %>
+
+Arrival airport: <%= @flight.arrival_location %>, <%= @flight.arrival_date %>
+
+Passenger Details:
+=========================================================================
+
+<% @booking.passengers.each do |p| %>
+
+Name: <%= p.first_name %> <%= p.last_name %>
+Email: <%= p.email %>
+
+--------------------------------------------------------------------------
+<% end %>
+
+To view your booking, follow this link: <%#= url %>
