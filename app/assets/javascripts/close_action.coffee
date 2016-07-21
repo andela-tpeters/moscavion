@@ -1,5 +1,3 @@
 $ ->
-	$('.close').on 'click', -> 
-		$(this)
-					.parent()
-					.hide()
+  $('.close').on 'click', ->
+    $(this).parent().hide()

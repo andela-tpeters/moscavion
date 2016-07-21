@@ -22,7 +22,6 @@ RSpec.feature "IndexPages", type: :feature do
 	  it 'does something' do
 	  	visit "/"
 	  	click_on "All flight"
-			binding.pry
 		end
 	end
 end
