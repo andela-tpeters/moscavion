@@ -1,11 +1,19 @@
-<%= form_for @booking, :url => new_booking_path,
+<%= form_for @booking, :url => update_path,
 												html: {
 																:onchange => "disableSubmit()",
 																:class => "ui form",
 																:name => "new-booking-form",
 																:id => "new-booking-form"
 															} do |f| %>
-<%= f.hidden_field :flight_id %>
+<div class="inline field">
+	<%= f.label :flight_id %>
+	<%= f.select :flight_id, options_for_select(@flights, @booking.flight_id), {}, id: "change_flight" %>
+</div>
+<p></p>
+<div class="ui divider"></div>
+<p></p>
+<%= f.hidden_field :id %>
+<%= f.hidden_field :booking_code %>
 <%= f.hidden_field :price %>
 <%= f.fields_for :passengers do |p| %>
 <%= render "passenger_fields", f: p %>
@@ -16,6 +24,6 @@
 	<% end %>
 </div>
 <%= f.submit "Submit", :class => "ui basic m-button button disabled large submit-button" %>
-<button type="button" class="ui button basic m-button" onclick="confirmation()">Confirm Info</button>
+<button type="button" class="ui button teal" onclick="confirmation()">Confirm Info</button>
 <% end %>
 <%= render :partial => "confirmation_modal" %>
