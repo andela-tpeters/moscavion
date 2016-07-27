@@ -1,31 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Airport, type: :model do
-	describe '#instantiation' do
-	  it 'should be an instance of Airport' do
-	  	airport = build(:airport)
-	  	expect(airport).to be_kind_of(Airport)  
-	  end
-	end
-
-	describe '#save' do
-	  it 'should be able to save' do
-	  	airport = build(:airport)
-	  	expect(airport.new_record?).to be_truthy
-
-	  	expect(Airport.all.size).to eql(0)
-
-	  	airport.save
-
-	  	expect(Airport.all).to include(airport)
-
-	  	find_airport = Airport.find_by(name: "Heathrow")
-	  	expect(find_airport).to eql(airport)
-	  	expect(find_airport.longitude).to eql(airport.longitude)
-	  end
-	end
-
-	describe "#create" do
+	describe "create" do
   	it 'should create airport and save' do
   		expect(Airport.all).to be_empty
 
@@ -97,7 +73,7 @@ RSpec.describe Airport, type: :model do
 	  	expect(@airport.flights.size).to eql(3)
   	end
 
-  	it 'should not duplicates' do
+  	it 'should not duplicate flight' do
   		@airport.flights << @flight
   		@airport.flights << @flight
   		expect(@airport.flights.size).to eql(1)

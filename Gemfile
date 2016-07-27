@@ -14,7 +14,10 @@ gem 'puma'
 gem 'semantic-ui-sass', github: 'doabit/semantic-ui-sass'
 gem 'bcrypt'
 gem 'faker'
-gem 'jquery-turbolinks'
+gem 'cocoon'
+gem 'will_paginate', '~> 3.1.0'
+gem 'figaro'
+gem 'paypal-express'
 
 group :development, :test do
   gem 'pry'
@@ -27,6 +30,8 @@ group :development, :test do
   gem 'sqlite3'
   gem "letter_opener"
   gem "database_cleaner"
+  gem 'chromedriver-helper'
+  gem 'selenium-webdriver'
 end
 
 group :development do

@@ -1,11 +1,13 @@
 $(document).ready(function() {
-    let db = new localStorageDB("flight_db", sessionStorage);
-    let form_data = $("#search_flight_form").serialize();
-    if (db.isNew()) {
-        $.get("<%= search_path %>", form_data).then(function(res) {
-            db.createTableWithData("flights", res);
-        });
-    } else {
-        console.log("Local storage is already set");
+    var db = new localStorageDB("flight_db", localStorage);
+    if (db.tableExists("flights")) {
+    	db.dropTable("flights");
+    	console.log("Flights Table dropped");
     }
+    var form_data = $("#search_flight_form").serialize();
+    $.get("/search", form_data).then(function(res) {
+        db.createTableWithData("flights", res);
+        db.commit();
+    });
+    console.log("Flights Tables set");
 });

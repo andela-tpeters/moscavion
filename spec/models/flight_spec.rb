@@ -42,9 +42,6 @@ RSpec.describe Flight, type: :model do
 
 			expect { create(:flight, departure_date: nil) }
 							.to raise_error ActiveRecord::RecordInvalid
-
-			expect { create(:flight, airport_id: nil) }
-							.to raise_error ActiveRecord::RecordInvalid
 		end
 
 		it 'should raise ArgumentError for incomplete arguments' do
@@ -60,10 +57,6 @@ RSpec.describe Flight, type: :model do
 			expect { create(:flight, departure_location: 1000) }
 							.to raise_error ActiveRecord::RecordInvalid
 			expect { create(:flight, arrival_location: 1000) }
-							.to raise_error ActiveRecord::RecordInvalid
-			expect { create(:flight, airline_id: "blue") }
-							.to raise_error ActiveRecord::RecordInvalid
-			expect { create(:flight, airport_id: "one") }
 							.to raise_error ActiveRecord::RecordInvalid
 		end
 	end

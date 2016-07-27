@@ -1,0 +1,31 @@
+<div class="ui modal signup-modal small">
+	<i class="close icon"></i>
+	<div class="header">
+		Signup
+	</div>
+	<div class="content">
+		<%= form_for new_user, url: signup_url , html: { class: "ui form", id: "signup-form" } do |f| %>
+			<div class="field">
+				<%= f.label :first_name %>
+				<%= f.text_field :first_name, { required: true, minlength: 6 } %>
+			</div>
+			<div class="field">
+				<%= f.label :last_name %>
+				<%= f.text_field :last_name, { required: true, minlength: 6 } %>
+			</div>
+			<div class="field">
+				<%= f.label :email %>
+				<%= f.email_field :email, { required: true, minlength: 6 } %>
+			</div>
+			<div class="field">
+				<%= f.label :password %>
+				<%= f.password_field :password, { required: true, minlength: 6 } %>
+			</div>
+			<div class="field">
+				<%= f.label :password_confirm %>
+				<%= f.password_field :password_confirm, { required: true, minlength: 6, oninput: "confirmPassword()" } %>
+			</div>
+			<button class="ui basic m-button button disabled" id="signup-submit">Submit</button>
+		<% end %>
+	</div>
+</div>

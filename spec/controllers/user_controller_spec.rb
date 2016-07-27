@@ -29,7 +29,7 @@ RSpec.describe UserController, type: :controller do
 				id = session[:user_id]
 				expect(id).to eql(1)
 				expect(User.find_by(:id => id).email).to eql(user[:email])
-				expect(response).to redirect_to(request.env["HTTP_REFERER"])
+				expect(response).to redirect_to(root_path)
 				expect(logged_in?).to be_truthy
 			end
 		end
@@ -38,27 +38,61 @@ RSpec.describe UserController, type: :controller do
 			it 'returns an error' do
 				user["password"] = ""
 				post_login
-				expect(session["flash"]["flashes"]["error"])
-							.to eql("Your email or password is not correct")
-				expect(response).to redirect_to(login_page_path)
+				expect(session["flash"]["flashes"]["errors"])
+							.to eql("User details cannot be empty")
+				expect(response).to redirect_to(request.env["HTTP_REFERER"])
+			end
+		end
+
+		context 'when user is not registered' do
+			it 'returns a flash' do
+				user[:email] = "bengos@b.com"
+				post_login
+				expect(session["flash"]["flashes"]["errors"])
+								.to include("User not registered")
+				expect(response).to redirect_to(root_path)
 			end
 		end
 	end
 
-	describe "GET signup page" do
-		it 'routes to the signup page' do
-			get :signup
-			expect(response).to render_template("signup")
-			expect(response.body).to include("Register")
-			expect(response.body).to include("signup-form")
+	describe "POST signup page" do
+		context 'when signup details are correct' do
+			it 'creates the user and then logs the user in' do
+				request.env["HTTP_REFERER"] = "where_i_am_coming_from"
+				post :signup, user: { first_name: "Tijesunimi", last_name: "Petros",
+															email: "tijesunimi48@gmail.com",
+															password: "petros",
+															password_confirm: "petros"}
+				expect(response.body).to redirect_to(root_path)
+				expect(User.last.first_name).to eql("Tijesunimi")
+			end
+		end
+
+		context 'when signup details are not correct' do
+			it 'does not create user and redirects to the referer witha a flash message' do
+				request.env["HTTP_REFERER"] = "where_i_am_coming_from"
+				post :signup, user: { first_name: "Tijesunimi", last_name: "Pe",
+															email: "tijesunimi48@gmail.com", password: "petros",
+															password_confirm: "petros"}
+				expect(session["flash"]["flashes"]["errors"])
+								.to include("Last name is too short (minimum is 6 characters)")
+				expect(User.find_by(last_name: "Pe")).to be_nil
+				expect(response).to redirect_to(root_path)
+			end
 		end
 	end
 
-	describe 'GET login' do
-		it 'routes to the login page' do
-		  get :login_page
-		  expect(response).to render_template('login_page')
-		  expect(response.body).to include('Login')
-		end
+	describe 'logout' do
+	  it 'clears session' do
+	  	post_login
+	  	id = session[:user_id]
+	  	expect(id).to eql(1)
+
+	  	get :logout
+	  	expect(session[:user_id]).to be_nil
+	  	expect(session["flash"]["flashes"]["notice"])
+							.to eql("You have successfully logged out")
+	  	expect(response).to redirect_to(root_path)
+	  end
 	end
 end

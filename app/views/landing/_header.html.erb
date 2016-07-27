@@ -1,27 +1,43 @@
-<div class="ui grid middle aligned one column center aligned" id="header-container">
-  <div class="row">
-    <div class="three wide column logo-side" data-content="Fruktur">
-      <div class="ui grid">
-        <div class="six wide column">
-          <a href="#" role="button" class="my-link"><i class="home icon"></i> Home</a>
+<div class="ui centered grid" id="header-container">
+  <div class="ui middle aligned grid container">
+    <div class="ui sixteen wide column">
+      <div class="ui three column grid stackable">
+        <div class="column">
+          <div class="ui two column grid stackable">
+            <div class="column centered">
+              <a href="<%= your_bookings_path %>" role="button" class="my-link <%= disable_profile_link %>"><i class="home icon"></i>Profile</a>
+            </div>
+            <div class="column centered">
+              <div><a href="#" onclick="searchFlight()" role="button" class="my-link ui button basic"><i class="plane icon"></i> All flight</a></div>
+            </div>
+          </div>
         </div>
-        <div class="nine wide column">
-          <a href="#" role="button" class="my-link"><i class="plane icon"></i> Book flight</a>
+        <div class="column">
+          <div class="middle aligned">
+            <span id="logo"><a href="/"><h1 class="ui first header">Moscavion</h1></a></span>
+          </div>
         </div>
-      </div>
-    </div>
-    <div class="six wide column" id="logo">
-      <span></span>
-      <a href="#"><h1 class="ui first header">Moscavion</h1></a>
-      <span></span>
-    </div>
-    <div class="three wide column logo-side" data-content="Brains">
-      <div class="ui grid">
-        <div class="nine wide column">
-          <a href="#" role="button" class="my-link"><i class="edit icon"></i> Manage</a>
-        </div>
-        <div class="six wide column">
-          <a href="#" role="button" class="my-link"><i class="sign in icon"></i> Sign In</a>
+        <div class="column">
+          <div class="ui two column grid stackable">
+            <div class="column centered">
+              <div class="">
+                <a href="#" onclick="showManageForm()" role="button" class="my-link ui button basic"><i class="edit icon"></i> Manage</a>
+              </div>
+            </div>
+            <div class="column centered">
+              <div class="">
+                <% if session[:user_id].nil? %>
+                <span class="ui button basic">
+                  <a href="#" role="button" class="my-link" onclick="openSignin()">Sign In</a> |
+                  <a href="#" role="button" class="my-link" onclick="openSignup()">Sign Up</a>
+                </span>
+                <% else %>
+                <a href="<%= logout_path %>" role="button" class="my-link ui button basic" remote="true"><i class="sign out icon"></i>Log Out</a>
+                <% end %>
+              </div>
+            </div>
+          </div>
+          
         </div>
       </div>
     </div>

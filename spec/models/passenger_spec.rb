@@ -1,27 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe Passenger, type: :model do
-	describe '#instantiation' do
-	  it 'builds a passenger object' do
-	  	passenger = build(:passenger)
-	  	expect(passenger).to be_kind_of(Passenger)
-	  end
-	end
-
-	describe '#save' do
-		it 'saves a passenger object to the database' do
-			passenger = build :passenger
-		  passenger.save
-
-		  expect(Passenger.all).to include(passenger)
-		end
-
-		it 'builds a passenger object and saves to the database' do
-			passenger = create :passenger
-			expect(Passenger.all).to include(passenger)
-		end
-	end
-
 	describe 'validations' do
 	  it 'raises error on wrong email format' do
 	  	expect { create(:passenger, :email => "tijesunimi.com") }

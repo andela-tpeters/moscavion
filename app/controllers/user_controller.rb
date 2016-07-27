@@ -1,22 +1,40 @@
 class UserController < ApplicationController
-	def login
-		user = User.find_by(:email => login_params[:email])
-		unless user.password == login_params[:password]
-			flash[:error] = "Your email or password is not correct"
-			redirect_to login_page_path and return
-		end
-		session[:user_id] = user.id
-		redirect_to request.referer and return
-	end
+  before_action :user_blank?, only: [:login]
 
-	def login_page
-	end
+  def login
+    Custom::MoscavionUser.new(request, login_params, :login)
+    redirect_to root_path and return
+  end
 
-	def signup
-	end
+  def signup
+    Custom::MoscavionUser.new(request, user_params, :signup)
+    redirect_to root_path and return
+  end
 
-	private
-	def login_params
-		params.require(:user_details).permit(:email, :password)
-	end
+  def logout
+    session.clear
+    flash[:notice] = "You have successfully logged out"
+    redirect_to root_path and return
+  end
+
+  private
+  def login_params
+    params.require(:user_details).permit(:email, :password)
+  end
+
+  def user_params
+    params.require(:user).permit(:first_name, :last_name,
+                                  :email, :password, :password_confirm)
+  end
+
+  def user_blank?
+    if prune_params.blank? || prune_params.size < 2
+      flash[:errors] = "User details cannot be empty"
+      redirect_to :back and return
+    end
+  end
+
+  def prune_params
+    login_params.delete_if { |key, value| value.blank? }
+  end
 end

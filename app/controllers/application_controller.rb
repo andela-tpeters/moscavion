@@ -6,8 +6,12 @@ class ApplicationController < ActionController::Base
 
 	def check_session
 		if current_user.nil?
-			flash[:session_error] = "Please login to continue"
-			redirect_to login_page_path and return
+			flash[:errors] = "Please login to continue"
+			redirect_to root_path and return
 		end
+	end
+
+	def errors
+		flash[:errors]
 	end
 end

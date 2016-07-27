@@ -1,51 +1,80 @@
 class BookingController < ApplicationController
-	before_action :check_session, :only => [:index]
+  before_action :check_session, :only => [:past_bookings]
+  before_action :check_email, :only => [:new, :update]
 
-	def index
-		@bookings = current_user.bookings
-	end
+  def past_bookings
+    @bookings = Custom::Reservation.bookings current_user, params[:page]
+  end
 
-	def new
-		booking = create_booking
-		unless booking.errors.empty?
-			flash[:errors] = booking.errors.messages
-			redirect_to :back and return
-		end
-		flash[:notice] = "Booking Successful"
-		redirect_to your_bookings_path and return if logged_in?
-		redirect_to root_path
-	end
+  def new
+    booking = Custom::Reservation.create(request, booking_params,
+                        current_user, email)
+    handle_redirect booking[:flight_id], true
+  end
 
-	def manage
-		# @booking = Booking.find_by(manage_params)
-	end
+  def create
+    redirect_to root_path and return unless flight_exist? params[:flight_id]
+    data = Custom::Routes.new_booking request, params[:flight_id]
+    handle_booking_redirect request, data
+  end
 
-	def search_bookings
-		@booking = Booking.find_by(search_params)
-		@passengers = @booking.passengers
-	end
+  def manage
+    booking = Custom::Reservation.find(request, search_params)
+    handle_booking_redirect request, booking
+  end
 
-	def update
-		@booking.update(booking_params)
-		redirect_to manage_booking_path
-	end
+  def update
+    Custom::Reservation.update request, booking_params, email
+    booking = { booking: { booking_code: booking_params[:booking_code] } }
+    handle_redirect booking
+  end
 
-	private
-	def booking_params
-		params.require(:booking).permit(:flight_id, :user_id,
-																				:price,
-																				passengers_attributes: [:id, :first_name, :last_name, :email])
-	end
+  def email
+    return current_user.email if current_user
+    params[:send_email]
+  end
 
-	def create_booking
-		if logged_in? && current_user
-			current_user.bookings.create booking_params
-		else
-			Booking.create booking_params
-		end
-	end
+  def delete
+    if Booking.find_by(id: params[:id]).destroy
+      flash[:notice] = "Reservation deleted Successfully"
+    else
+      flash[:errors] = "Reservation not deleted"
+    end
+    redirect_to :back
+  end
 
-	def search_params
-		params.require(:booking).permit(:booking_code)
-	end
+  private
+  def booking_params
+    params.require(:booking).permit(:flight_id, :user_id, :booking_code,
+                                    :price, passengers_attributes: [
+                                      :id, :first_name, :last_name,
+                                      :email, :_destroy])
+  end
+
+  def search_params
+    params.require(:booking).permit(:booking_code)
+  end
+
+  def check_email
+    flash[:errors] = "Pls provide recevier email" unless email
+  end
+
+  def handle_redirect(pay_load, flag=false)
+    redirect_to booking_page_path(pay_load) and return if errors && flag
+    redirect_to manage_booking_path(pay_load) and return if errors && !flag
+    redirect_to your_bookings_path and return if current_user
+    redirect_to root_path
+  end
+
+  def flight_exist?(flight_id)
+    Custom::Routes.flight_exist? request, flight_id
+  end
+
+  def handle_booking_redirect(req, booking)
+    redirect_to root_path and return if booking.nil?
+    if Custom::Routes.departed?(req, booking[:flight])
+      redirect_to root_path and return
+    end
+    render locals: booking
+  end
 end

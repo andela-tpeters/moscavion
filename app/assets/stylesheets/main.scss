@@ -5,6 +5,34 @@
   src: url("Economica_Std.ttf");
 }
 
+@font-face {
+	font-family: fruktur;
+	src: url("Fruktur-Regular.ttf")
+}
+
 body {
   font-family: $main-font !important;
 }
+
+.border {
+	border: 1px solid;
+}
+
+.logo_font {
+	font-family: fruktur, cursive;
+}
+
+.flash {
+	position: fixed !important;
+	top: 20%;
+	right: 11.6%;
+	z-index: 120;
+}
+
+.flash_login {
+	position: fixed !important;
+	left: 11.6%;
+	top: 20%;
+	z-index: 120;
+}
+
