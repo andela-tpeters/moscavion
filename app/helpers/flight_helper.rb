@@ -1,6 +1,6 @@
 module FlightHelper
 	def format_date(date)
-		date.strftime("%d, %B %Y @ %H:%M:%S")
+		date.localtime.strftime("%d, %B %Y @ %H:%M:%S")
 	end
 
 	def flight_row(description, icon_name, value)

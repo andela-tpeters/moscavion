@@ -1,8 +1,8 @@
 <%= render layout: "index" do %>
 	<h2 class="ui header">Past Bookings</h2>
 	<div class="ui divider"></div>
-	<div class="ui cards">
-		<%= render partial: "booking_item", collection: @bookings, as: :item %>
+	<div class="ui <%= class_for_bookings(@bookings) %>">
+		<%= display_bookings @bookings %>
 	</div>
 	<div class="ui divider"></div>
 	 <%= will_paginate @bookings %>

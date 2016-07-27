@@ -1,9 +1,9 @@
 <% if flash[:errors] %>
-<div class="ui grid error small message m-message four wide column" style="border: 1px solid; position: fixed; top: 20%; right: 11.6%; z-index: 120">
+<div class="ui grid error small message m-message four wide column flash">
 	<i class="close icon"></i>
 	<div class="content">
-		<i class="error icon"></i>
-		<%= flash[:errors].map.with_index(1) { |x, index| "#{index}. #{x}<br>"}.join.html_safe %>
+		<!-- <i class="info icon"></i> -->
+		<%= flash[:errors].html_safe %>
 	</div>
 </div>
 <% end %>

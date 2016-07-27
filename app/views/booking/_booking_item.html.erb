@@ -10,19 +10,21 @@
 		</div>
 		<div class="ui divider"></div>
 		<div class="description">
-			<i class="code icon"></i> Booking Code: <h2><pre> <%= item.booking_code %> </pre></h2>
-			<div class="ui divider"></div>
-			Booked <%= item.passengers.size %> passenger(s)
-			<div class="ui divider"></div>
-			<div class="">
-				Total amount: <span class="ui brown label tag"><%= item.price %></span>
-			</div>
+		<i class="code icon"></i> Booking Code: <h2><pre> <%= item.booking_code %> </pre></h2>
+		<div class="ui divider"></div>
+		Booked <%= item.passengers.size %> passenger(s)
+		<div class="ui divider"></div>
+		<div class="">
+			Total amount: <span class="ui brown label tag"><%= item.price %></span>
 		</div>
 	</div>
-	<div class="extra content">
-			<div class="ui two buttons">
-				<%= link_to("<i class='trash icon'></i>Delete".html_safe, delete_booking_path(item.id), method: "delete", class: "ui button basic red") %>
-				<a href="<%= manage_booking_path booking: {booking_code: item.booking_code} %>" class="ui button basic m-button"><i class="edit icon"></i>Edit</a>
-			</div>
-		</div>
+</div>
+<div class="extra content">
+	<div class="ui two buttons">
+		<%= link_to("<i class='trash icon'></i>Delete".html_safe, delete_booking_path(item.id), method: "delete", class: "ui button basic red") %>
+		<a href="<%= manage_booking_path booking: {booking_code: item.booking_code} %>" class="ui button basic m-button <%= disable_edit(item) %>">
+			<i class="edit icon"></i>Edit
+		</a>
+	</div>
+</div>
 </div>

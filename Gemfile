@@ -16,6 +16,8 @@ gem 'bcrypt'
 gem 'faker'
 gem 'cocoon'
 gem 'will_paginate', '~> 3.1.0'
+gem 'figaro'
+gem 'paypal-express'
 
 group :development, :test do
   gem 'pry'

@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe BookingController, type: :controller do
 	let(:new_booking) { {
-			flight_id: Flight.first,
+			flight_id: Flight.first.id,
 			price: Faker::Commerce.price,
 			passengers_attributes: [{:first_name => "Tijesunimi",
 															:last_name => "Peters",
@@ -17,7 +17,7 @@ RSpec.describe BookingController, type: :controller do
 
 	def post_new
 		request.env["HTTP_REFERER"] = "new_booking_path"
-		post :new, :booking => new_booking
+		post :new, booking: new_booking, send_email: "tijesunimi@gmail.com"
 	end
 
 	describe 'session' do
@@ -39,7 +39,8 @@ RSpec.describe BookingController, type: :controller do
 			it 'should save booking and redirect to your_bookings_path' do
 				post_new
 				expect(response).to redirect_to(your_bookings_path)
-				expect(Booking.find_by(:flight_id => 1).flight).to eql(new_booking[:flight_id])
+				flight = Flight.find_by id: new_booking[:flight_id]
+				expect(Booking.find_by(:flight_id => 1).flight).to eql(flight)
 			end
 		end
 
@@ -47,14 +48,6 @@ RSpec.describe BookingController, type: :controller do
 			it 'raise error' do
 				new_booking.clear
 				expect{ post_new }.to raise_error ActionController::ParameterMissing
-			end
-		end
-
-		context 'when parameters are nil' do
-			it 'raise error' do
-				new_booking[:flight_id] = nil
-				post_new
-				expect(response).to redirect_to(request.env["HTTP_REFERER"])
 			end
 		end
 	end
@@ -107,11 +100,31 @@ RSpec.describe BookingController, type: :controller do
 	  	post_new
 	  	expect(Passenger.all.size).to eql(0)
 	  end
+
+	  context 'when flight id does not exist' do
+	  	it 'redirect_to root_path' do
+	  		get :create, flight_id: 50000
+	  		expect(response).to redirect_to(root_path)
+	  		expect(session["flash"]["flashes"]["errors"])
+	  				.to include("Flight does not exist")
+	  	end
+	  end
+
+	  context 'when flight exists' do
+	  	render_views
+	  	it 'renders create page' do
+	  		flight = Flight.where("departure_date >= ?", Time.now).first
+	  		get :create, flight_id: flight.id
+	  		expect(response).to render_template(:create)
+	  		expect(response.body).to include(flight.departure_location)
+	  	end
+	  end
 	end
 
 	describe 'manage' do
 		before do
 			new_booking[:flight_id] = Flight.offset(rand(Flight.count)).first
+																# .where("departure_date >= ?", Time.now).first
 			new_booking[:passengers_attributes] = [{:first_name => "Kongas",
 	  																					:last_name => "Peters",
 	  																					:email => "Konga@gmail.com"},
@@ -120,30 +133,24 @@ RSpec.describe BookingController, type: :controller do
 	  																					:email => "bongos@gmail.com"}]
 			post_new
 	  end
+
 	  context 'when user inputs booking code' do
 	  	let(:reservation) { Booking.last }
-	  	
-	  	it 'returns the reservation' do
-	  		get :manage, booking: {booking_code: reservation.booking_code}
-	  		booking = assigns(:booking)
-	  		expect(booking.booking_code).to eql(reservation.booking_code)
+
+	  	context 'invalid booking code' do
+		  	it 'flashes error on invalid booking code' do
+		  		get :manage, booking: { booking_code: "12h2y3us"}
+		  		expect(session["flash"]["flashes"]["errors"])
+		  						.to include("Booking reservation not found")
+		  		expect(response).to redirect_to(root_path)
+		  	end
 	  	end
 
-	  	it 'updates the passenger' do
-	  		get :manage, :booking => {:booking_code => reservation.booking_code}
-	  		booking = assigns(:booking)
-	  		new_booking[:flight_id] = 30
-	  		new_booking[:booking_code] = booking.booking_code
-	  		new_booking[:price] = booking.price
-	  		new_booking[:id] = booking.id
-	  		new_booking[:passengers_attributes] = [{:first_name => "Benevolent",
-	  																					:last_name => "Peters",
-	  																					:email => "Konga@gmail.com", :id => 1,
-	  																					:booking_id => booking.id}]
-	  		post :update, :booking => new_booking
-	  		passenger = Passenger.find_by(:id => 1)
-	  		expect(passenger.first_name).to eql("Benevolent")
-	  		expect(Passenger.all.size).to eql(2)
+	  	context 'when flight has departed' do
+	  		it 'render_template to manage' do
+	  			get :manage, :booking => { :booking_code => reservation.booking_code }
+	  			expect(response).to render_template(:manage)
+	  		end
 	  	end
 	  end
 	end
@@ -160,7 +167,7 @@ RSpec.describe BookingController, type: :controller do
 
 	describe 'flights route' do
 	  it 'returns flights routes' do
-	  	expect(controller.send(:flights_route)[0]).to be_kind_of(Array)
+	  	expect(Custom::Routes.to_s).to be_kind_of(Array)
 	  end
 	end
 end

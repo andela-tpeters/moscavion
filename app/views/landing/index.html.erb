@@ -22,7 +22,7 @@
         <div class="eight wide column">
           <div class="ui grid center aligned">
             <div class="">
-              <%= render :partial => "flight_form" %>
+              <%= render "flight_form", { departures: departures, arrivals: arrivals } %>
             </div>
           </div>
         </div>
@@ -30,4 +30,3 @@
     </div>
   </div>
 </div>
-<%#= render :partial => "landing/flight_search_modal" %>

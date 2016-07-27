@@ -1,49 +1,44 @@
 class BookingController < ApplicationController
   before_action :check_session, :only => [:past_bookings]
+  before_action :check_email, :only => [:new, :update]
 
   def past_bookings
-    @bookings = current_user.bookings
-                            .order(created_at: "desc")
-                            .paginate(page: params[:page], per_page: 4)
+    @bookings = Custom::Reservation.bookings current_user, params[:page]
   end
 
   def new
-    booking = create_booking
-    if booking.errors.empty?
-      flash[:notice] = "Booking Successful"
-      send_mail booking and return true
-    else
-      flash[:errors] = booking.errors.full_messages
-      redirect_to :back and return
-    end
+    booking = Custom::Reservation.create(request, booking_params,
+                        current_user, email)
+    handle_redirect booking[:flight_id], true
   end
 
   def create
-    @flight = Flight.find_by(:id => params[:flight_id])
-    @booking = @flight.bookings.new({:price => @flight.price})
+    redirect_to root_path and return unless flight_exist? params[:flight_id]
+    data = Custom::Routes.new_booking request, params[:flight_id]
+    handle_booking_redirect request, data
   end
 
   def manage
-    if booking.nil?
-      flash[:errors] = ["Booking reservation not found"]
-      redirect_to :back and return
-    end
-    @booking = booking
-    @flights = flights_route
-    @flight = @booking.flight
-    @flight.price = @booking.price
+    booking = Custom::Reservation.find(request, search_params)
+    handle_booking_redirect request, booking
   end
 
   def update
-    if booking.update(booking_params)
-      flash[:notice] = "Booking Updated Successfully"
-    end
-    send_mail booking
+    Custom::Reservation.update request, booking_params, email
+    booking = { booking: { booking_code: booking_params[:booking_code] } }
+    handle_redirect booking
+  end
+
+  def email
+    return current_user.email if current_user
+    params[:send_email]
   end
 
   def delete
     if Booking.find_by(id: params[:id]).destroy
       flash[:notice] = "Reservation deleted Successfully"
+    else
+      flash[:errors] = "Reservation not deleted"
     end
     redirect_to :back
   end
@@ -56,40 +51,30 @@ class BookingController < ApplicationController
                                       :email, :_destroy])
   end
 
-  def booking
-    Booking.find_by(search_params)
-  end
-
-  def create_booking
-    if logged_in? && current_user
-      current_user.bookings.create booking_params
-    else
-      Booking.create booking_params
-    end
-  end
-
-  def send_mail(booking)
-    if logged_in? && current_user
-      BookingMailer.successful_booking(booking, current_user).deliver_later
-      redirect_to your_bookings_path and return
-    else
-      booking.passengers.each do |p|
-        BookingMailer.successful_booking(booking, p).deliver_later
-      end
-      redirect_to root_path and return
-    end
-  end
-
   def search_params
     params.require(:booking).permit(:booking_code)
   end
 
-  def flights_route
-    Flight.where("departure_date >= ?", Time.now).order(departure_date: :asc)
-                .map do |flight| 
-                ["#{flight.departure_location} to #{flight.arrival_location}",
-                  flight.id
-                ]
-                end
+  def check_email
+    flash[:errors] = "Pls provide recevier email" unless email
+  end
+
+  def handle_redirect(pay_load, flag=false)
+    redirect_to booking_page_path(pay_load) and return if errors && flag
+    redirect_to manage_booking_path(pay_load) and return if errors && !flag
+    redirect_to your_bookings_path and return if current_user
+    redirect_to root_path
+  end
+
+  def flight_exist?(flight_id)
+    Custom::Routes.flight_exist? request, flight_id
+  end
+
+  def handle_booking_redirect(req, booking)
+    redirect_to root_path and return if booking.nil?
+    if Custom::Routes.departed?(req, booking[:flight])
+      redirect_to root_path and return
+    end
+    render locals: booking
   end
 end

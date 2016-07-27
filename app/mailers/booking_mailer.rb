@@ -1,10 +1,9 @@
 class BookingMailer < ApplicationMailer
 	default from: "no-reply@moscavion.com"
 
-	def successful_booking(booking, user)
+	def successful_booking(booking, mail_to)
     @booking = booking
-    @user = user
     @flight = booking.flight
-    mail(to: @user.email, subject: "Successful Booking")
+    mail(to: mail_to, subject: "Successful Booking")
   end
 end

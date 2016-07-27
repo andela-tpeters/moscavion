@@ -15,6 +15,11 @@
 .pad20 {
   padding: 20px;
 }
+
+/* line 19, /Users/andela/Projects/moscavion/app/assets/stylesheets/booking.scss */
+.bottom_margin_20 {
+  margin-bottom: 20px;
+}
 /* line 5, /Users/andela/Projects/moscavion/app/assets/stylesheets/landing.scss */
 .brown {
   color: #302013;
@@ -24,14 +29,12 @@
 #header-container {
   min-height: 140px;
   width: 100%;
-  margin: 0;
   position: absolute;
   z-index: 2;
-  top: 0;
   background-color: #fff;
 }
 
-/* line 19, /Users/andela/Projects/moscavion/app/assets/stylesheets/landing.scss */
+/* line 17, /Users/andela/Projects/moscavion/app/assets/stylesheets/landing.scss */
 #loading {
   background-color: #fff;
   height: 100%;
@@ -42,14 +45,14 @@
   top: 0px;
 }
 
-/* line 29, /Users/andela/Projects/moscavion/app/assets/stylesheets/landing.scss */
+/* line 27, /Users/andela/Projects/moscavion/app/assets/stylesheets/landing.scss */
 #loading-center {
   height: 100%;
   position: relative;
   width: 100%;
 }
 
-/* line 35, /Users/andela/Projects/moscavion/app/assets/stylesheets/landing.scss */
+/* line 33, /Users/andela/Projects/moscavion/app/assets/stylesheets/landing.scss */
 #loading-center-absolute {
   position: absolute;
   left: 50%;
@@ -60,18 +63,18 @@
   margin-left: -100px;
 }
 
-/* line 45, /Users/andela/Projects/moscavion/app/assets/stylesheets/landing.scss */
+/* line 43, /Users/andela/Projects/moscavion/app/assets/stylesheets/landing.scss */
 #map-box {
   min-height: 660px;
   padding-top: 160px;
 }
 
-/* line 50, /Users/andela/Projects/moscavion/app/assets/stylesheets/landing.scss */
+/* line 48, /Users/andela/Projects/moscavion/app/assets/stylesheets/landing.scss */
 .content-wrapper {
   position: relative;
 }
 
-/* line 54, /Users/andela/Projects/moscavion/app/assets/stylesheets/landing.scss */
+/* line 52, /Users/andela/Projects/moscavion/app/assets/stylesheets/landing.scss */
 .content-container {
   left: 0;
   position: absolute;
@@ -81,7 +84,7 @@
   padding: 20px 0;
 }
 
-/* line 63, /Users/andela/Projects/moscavion/app/assets/stylesheets/landing.scss */
+/* line 61, /Users/andela/Projects/moscavion/app/assets/stylesheets/landing.scss */
 #footer-container {
   height: 100px;
   margin: 0;
@@ -91,26 +94,26 @@
   background-color: #fff;
 }
 
-/* line 73, /Users/andela/Projects/moscavion/app/assets/stylesheets/landing.scss */
+/* line 71, /Users/andela/Projects/moscavion/app/assets/stylesheets/landing.scss */
 #logo h1 {
   color: rgba(166, 134, 106, 0.5);
   font-family: "Fruktur", cursive;
   font-size: 40px;
 }
 
-/* line 80, /Users/andela/Projects/moscavion/app/assets/stylesheets/landing.scss */
+/* line 78, /Users/andela/Projects/moscavion/app/assets/stylesheets/landing.scss */
 #map {
   background-color: #fff;
   height: 33em;
   width: 100%;
 }
 
-/* line 86, /Users/andela/Projects/moscavion/app/assets/stylesheets/landing.scss */
+/* line 84, /Users/andela/Projects/moscavion/app/assets/stylesheets/landing.scss */
 .logo-side {
   position: relative;
 }
 
-/* line 90, /Users/andela/Projects/moscavion/app/assets/stylesheets/landing.scss */
+/* line 88, /Users/andela/Projects/moscavion/app/assets/stylesheets/landing.scss */
 .countries {
   fill: #d9c6b0;
   stroke: #302013;
@@ -120,24 +123,24 @@
   vector-effect: non-scaling-stroke;
 }
 
-/* line 99, /Users/andela/Projects/moscavion/app/assets/stylesheets/landing.scss */
+/* line 97, /Users/andela/Projects/moscavion/app/assets/stylesheets/landing.scss */
 .my-link {
   color: #8c2727;
   font-size: 12px;
   text-transform: uppercase;
 }
 
-/* line 105, /Users/andela/Projects/moscavion/app/assets/stylesheets/landing.scss */
+/* line 103, /Users/andela/Projects/moscavion/app/assets/stylesheets/landing.scss */
 .my-link:hover {
   color: #a0a0a0;
 }
 
-/* line 109, /Users/andela/Projects/moscavion/app/assets/stylesheets/landing.scss */
+/* line 107, /Users/andela/Projects/moscavion/app/assets/stylesheets/landing.scss */
 .footer-text-color {
   color: rgba(48, 32, 19, 0.5);
 }
 
-/* line 113, /Users/andela/Projects/moscavion/app/assets/stylesheets/landing.scss */
+/* line 111, /Users/andela/Projects/moscavion/app/assets/stylesheets/landing.scss */
 .airports {
   fill: #8c2727;
   stroke-linecap: round;
@@ -146,22 +149,22 @@
   vector-effect: non-scaling-stroke;
 }
 
-/* line 121, /Users/andela/Projects/moscavion/app/assets/stylesheets/landing.scss */
+/* line 119, /Users/andela/Projects/moscavion/app/assets/stylesheets/landing.scss */
 .route {
   fill: transparent;
 }
 
-/* line 125, /Users/andela/Projects/moscavion/app/assets/stylesheets/landing.scss */
+/* line 123, /Users/andela/Projects/moscavion/app/assets/stylesheets/landing.scss */
 .plane {
   fill: #302013;
 }
 
-/* line 129, /Users/andela/Projects/moscavion/app/assets/stylesheets/landing.scss */
+/* line 127, /Users/andela/Projects/moscavion/app/assets/stylesheets/landing.scss */
 .fullheight {
   height: 100%;
 }
 
-/* line 133, /Users/andela/Projects/moscavion/app/assets/stylesheets/landing.scss */
+/* line 131, /Users/andela/Projects/moscavion/app/assets/stylesheets/landing.scss */
 .ui.basic.m-button.buttons .button,
 .ui.basic.m-button.button {
   box-shadow: 0 0 0 1px #8c2727 inset !important;
@@ -169,7 +172,7 @@
   font-family: "Cairo", "lato", sans-serif;
 }
 
-/* line 140, /Users/andela/Projects/moscavion/app/assets/stylesheets/landing.scss */
+/* line 138, /Users/andela/Projects/moscavion/app/assets/stylesheets/landing.scss */
 .ui.basic.m-button.buttons .button:hover,
 .ui.basic.m-button.button:hover,
 .ui.basic.m-button.buttons .button:focus,
@@ -178,12 +181,12 @@
   color: #fff !important;
 }
 
-/* line 149, /Users/andela/Projects/moscavion/app/assets/stylesheets/landing.scss */
+/* line 147, /Users/andela/Projects/moscavion/app/assets/stylesheets/landing.scss */
 .m-phrase .phrase {
   font-size: 16px;
   line-height: 2;
 }
-/* line 154, /Users/andela/Projects/moscavion/app/assets/stylesheets/landing.scss */
+/* line 152, /Users/andela/Projects/moscavion/app/assets/stylesheets/landing.scss */
 .m-phrase .name {
   font-size: 50px;
   font-weight: 400px;
@@ -191,7 +194,7 @@
   opacity: 0.8;
 }
 
-/* line 162, /Users/andela/Projects/moscavion/app/assets/stylesheets/landing.scss */
+/* line 160, /Users/andela/Projects/moscavion/app/assets/stylesheets/landing.scss */
 .white {
   color: #fff;
 }
@@ -199,9 +202,39 @@
   font-family: logo;
   src: url("Economica_Std.ttf");
 }
-/* line 8, /Users/andela/Projects/moscavion/app/assets/stylesheets/main.scss */
+@font-face {
+  font-family: fruktur;
+  src: url("Fruktur-Regular.ttf");
+}
+/* line 13, /Users/andela/Projects/moscavion/app/assets/stylesheets/main.scss */
 body {
   font-family: "Cairo", "lato", sans-serif !important;
+}
+
+/* line 17, /Users/andela/Projects/moscavion/app/assets/stylesheets/main.scss */
+.border {
+  border: 1px solid;
+}
+
+/* line 21, /Users/andela/Projects/moscavion/app/assets/stylesheets/main.scss */
+.logo_font {
+  font-family: fruktur, cursive;
+}
+
+/* line 25, /Users/andela/Projects/moscavion/app/assets/stylesheets/main.scss */
+.flash {
+  position: fixed !important;
+  top: 20%;
+  right: 11.6%;
+  z-index: 120;
+}
+
+/* line 32, /Users/andela/Projects/moscavion/app/assets/stylesheets/main.scss */
+.flash_login {
+  position: fixed !important;
+  left: 11.6%;
+  top: 20%;
+  z-index: 120;
 }
 @charset "UTF-8";
 @import url("https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic&subset=latin,latin-ext");
@@ -209,9 +242,39 @@ body {
   font-family: logo;
   src: url("Economica_Std.ttf");
 }
-/* line 8, /Users/andela/Projects/moscavion/app/assets/stylesheets/main.scss */
+@font-face {
+  font-family: fruktur;
+  src: url("Fruktur-Regular.ttf");
+}
+/* line 13, /Users/andela/Projects/moscavion/app/assets/stylesheets/main.scss */
 body {
   font-family: "Cairo", "lato", sans-serif !important;
+}
+
+/* line 17, /Users/andela/Projects/moscavion/app/assets/stylesheets/main.scss */
+.border {
+  border: 1px solid;
+}
+
+/* line 21, /Users/andela/Projects/moscavion/app/assets/stylesheets/main.scss */
+.logo_font {
+  font-family: fruktur, cursive;
+}
+
+/* line 25, /Users/andela/Projects/moscavion/app/assets/stylesheets/main.scss */
+.flash {
+  position: fixed !important;
+  top: 20%;
+  right: 11.6%;
+  z-index: 120;
+}
+
+/* line 32, /Users/andela/Projects/moscavion/app/assets/stylesheets/main.scss */
+.flash_login {
+  position: fixed !important;
+  left: 11.6%;
+  top: 20%;
+  z-index: 120;
 }
 
 /*!
@@ -39986,5 +40049,4 @@ html.ios body {
  */
 
  @import '//fonts.googleapis.com/css?family=Cairo|Lato:400i';
- @import '//fonts.googleapis.com/css?family=Fruktur|Merienda|Mogra|Mr+Dafoe|Petit+Formal+Script|Poiret+One';
  
