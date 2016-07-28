@@ -1,18 +1,18 @@
 class BookingController < ApplicationController
   before_action :check_session, :only => [:past_bookings]
-  before_action :check_email, :only => [:new, :update]
+  before_action :check_email, :only => [:create, :update]
 
   def past_bookings
     @bookings = Custom::Reservation.bookings current_user, params[:page]
   end
 
-  def new
+  def create
     booking = Custom::Reservation.create(request, booking_params,
                         current_user, email)
     handle_redirect booking[:flight_id], true
   end
 
-  def create
+  def new
     redirect_to root_path and return unless flight_exist? params[:flight_id]
     data = Custom::Routes.new_booking request, params[:flight_id]
     handle_booking_redirect request, data

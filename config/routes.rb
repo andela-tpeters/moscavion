@@ -14,8 +14,8 @@ Rails.application.routes.draw do
     get "/logout" => :logout
     
     scope "booking", controller: :booking do
-      get "/book/:flight_id" => :create, as: :booking_page
-      post "/new" => :new, as: :new_booking
+      get "/book/:flight_id" => :new, as: :booking_page
+      post "/create" => :create, as: :new_booking
       get "/index" => :past_bookings, as: :your_bookings
       get "/manage" => :manage, as: :manage_booking
       patch "/update" => :update

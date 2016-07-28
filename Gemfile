@@ -18,6 +18,7 @@ gem 'cocoon'
 gem 'will_paginate', '~> 3.1.0'
 gem 'figaro'
 gem 'paypal-express'
+gem 'rails_12factor'
 
 group :development, :test do
   gem 'pry'
