@@ -1,0 +1,8 @@
+<% if flash[:errors] %>
+<div class="ui grid error small message m-message four wide column flash">
+  <i class="close icon"></i>
+  <div class="content">
+    <%= display_errors(flash[:errors]).html_safe %>
+  </div>
+</div>
+<% end %>

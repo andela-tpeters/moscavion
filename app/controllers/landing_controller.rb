@@ -1,5 +1,5 @@
 class LandingController < ApplicationController
 	def index
-		render locals: Custom::Routes.all_routes
+		render locals: Flight.all_routes
 	end
 end

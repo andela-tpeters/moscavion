@@ -3,28 +3,32 @@ class BookingController < ApplicationController
   before_action :check_email, :only => [:create, :update]
 
   def past_bookings
-    @bookings = Custom::Reservation.bookings current_user, params[:page]
+    @bookings = Reservation.bookings current_user, params[:page]
   end
 
   def create
-    booking = Custom::Reservation.create(request, booking_params,
-                        current_user, email)
+    booking = Reservation.create(request,
+                                booking_params,
+                                current_user,
+                                email)
     handle_redirect booking[:flight_id], true
   end
 
   def new
-    redirect_to root_path and return unless flight_exist? params[:flight_id]
-    data = Custom::Routes.new_booking request, params[:flight_id]
+    unless flight_exist? params[:flight_id]
+      redirect_to root_path and return
+    end
+    data = Routes.new_booking request, params[:flight_id]
     handle_booking_redirect request, data
   end
 
   def manage
-    booking = Custom::Reservation.find(request, search_params)
+    booking = Reservation.find(request, search_params)
     handle_booking_redirect request, booking
   end
 
   def update
-    Custom::Reservation.update request, booking_params, email
+    Reservation.update request, booking_params, email
     booking = { booking: { booking_code: booking_params[:booking_code] } }
     handle_redirect booking
   end
@@ -45,10 +49,18 @@ class BookingController < ApplicationController
 
   private
   def booking_params
-    params.require(:booking).permit(:flight_id, :user_id, :booking_code,
-                                    :price, passengers_attributes: [
-                                      :id, :first_name, :last_name,
-                                      :email, :_destroy])
+    params.require(:booking).permit(:flight_id,
+                                    :user_id,
+                                    :booking_code,
+                                    :price,
+                                    passengers_attributes: [
+                                      :id,
+                                      :first_name,
+                                      :last_name,
+                                      :email,
+                                      :_destroy
+                                      ]
+                                  )
   end
 
   def search_params
@@ -60,19 +72,24 @@ class BookingController < ApplicationController
   end
 
   def handle_redirect(pay_load, flag=false)
-    redirect_to booking_page_path(pay_load) and return if errors && flag
-    redirect_to manage_booking_path(pay_load) and return if errors && !flag
-    redirect_to your_bookings_path and return if current_user
-    redirect_to root_path
+    if errors && flag
+      redirect_to booking_page_path(pay_load) and return
+    elsif errors && !flag
+      redirect_to manage_booking_path(pay_load) and return
+    elsif current_user
+      redirect_to your_bookings_path and return
+    else
+      redirect_to root_path
+    end
   end
 
   def flight_exist?(flight_id)
-    Custom::Routes.flight_exist? request, flight_id
+    Routes.flight_exist? request, flight_id
   end
 
   def handle_booking_redirect(req, booking)
     redirect_to root_path and return if booking.nil?
-    if Custom::Routes.departed?(req, booking[:flight])
+    if Routes.departed?(req, booking[:flight])
       redirect_to root_path and return
     end
     render locals: booking

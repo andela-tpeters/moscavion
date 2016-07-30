@@ -2,9 +2,9 @@ require 'rails_helper'
 
 RSpec.describe FlightController, type: :controller do
 	let(:query) { {
-								:departure_location => nil,
-								:arrival_location => nil,
-								:departure_date => nil } }
+								departure_location: nil,
+								arrival_location: nil,
+								departure_date: nil } }
 
 	before(:all) do
 	  load "#{Rails.root}/spec/support/seed.rb" 
@@ -12,7 +12,7 @@ RSpec.describe FlightController, type: :controller do
 	end
 
 	def visit_search
-		get :search, :query => query
+		get :search, query: query
 	end
 
 	describe 'prune params' do
@@ -60,7 +60,7 @@ RSpec.describe FlightController, type: :controller do
 	  	end
 
 	  	it 'returns search results' do
-	  		query[:arrival_location] = Airport.find_by(:id => 50).name
+	  		query[:arrival_location] = Airport.find_by(id: 50).name
 	  		visit_search
 	  		result = JSON.parse(response.body)
 	  		expect(result).to be_kind_of(Array)

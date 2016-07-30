@@ -1,33 +1,28 @@
 class User < ActiveRecord::Base
   has_many :bookings
-  include BCrypt
+  has_secure_password
 
-  validates :first_name, :last_name, presence: true,
-                                     string: true,
-                                     length: { in: 6..25 },
-                                     allow_nil: false
+  validates :first_name,
+            :last_name,
+            presence: true,
+            length: { in: 6..25 },
+            allow_nil: false
 
-  validates :email, presence: true,
-                    format: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i,
-                    allow_nil: false,
-                    uniqueness: true
+  validates :email,
+            presence: true,
+            format: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i,
+            allow_nil: false,
+            uniqueness: true
 
-  def password
-    @password ||= Password.new(password_hash)
-  end
+  validates :password,
+            presence: true,
+            confirmation: true,
+            allow_nil: false,
+            length: { minimum: 6 }
 
-  def password=(new_password)
-    check_password new_password
-    @password = Password.create new_password
-    self.password_hash = @password
-  end
+   # validates :password_confirmation,
+   #          presence: true,
+   #          allow_nil: false,
+   #          length: { minimum: 6 }
 
-  private
-
-  def check_password(value)
-    if value.blank? || value.length < 6
-      errors.add(:password_hash, "Password must be <= 6 chars")
-      raise ActiveRecord::RecordInvalid.new self
-    end
-  end
 end

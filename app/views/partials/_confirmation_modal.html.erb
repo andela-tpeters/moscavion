@@ -1,0 +1,22 @@
+<div class="ui modal confirmation-modal">
+  <i class="close icon"></i>
+  <div class="header">
+    <i class="plane icon"></i> Confirm your booking data
+  </div>
+  <div class="description pad20">
+    <div class="two column ui grid">
+      <div class="column">
+        <%= render "partials/flight_description_table", { flight: flight } %>
+      </div>
+      <div class="column" id="passengers-information">
+        <div class="ui header">Passengers Information</div>
+        <div class="ui horizontal list" id="passengers-info-list">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="actions">
+    <button type="button" class="ui button" onclick="closeModal();">Cancel</button>
+    <button type="button" class="ui button" onclick="activateSubmit();">OK</button>
+  </div>
+</div>

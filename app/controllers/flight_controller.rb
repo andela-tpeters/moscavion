@@ -1,27 +1,21 @@
 class FlightController < ApplicationController
-	def search
-		render :json => flights
-	end
+  def search
+    render json: Flight.search(prune_params)
+  end
 
-	private
+  private
 
-	def search_params
-		params.require(:query).permit(:departure_location, :arrival_location,
-																	:passengers, :departure_date )
-	end
+  def search_params
+    params.require(:query).permit(:departure_location,
+                                  :arrival_location,
+                                  :passengers,
+                                  :departure_date )
+  end
 
-	def prune_params
-		return search_params if search_params.blank?
-		search_params.delete_if do |key, value|
-			value.blank?
-		end
-	end
-
-	def flights
-		if prune_params.blank?
-			Flight.where("departure_date > ?", Time.now)
-		else
-			Flight.where(prune_params).where("departure_date > ?", Time.now)
-		end
-	end
+  def prune_params
+    return search_params if search_params.blank?
+    search_params.delete_if do |key, value|
+      value.blank?
+    end
+  end
 end

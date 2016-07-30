@@ -1,5 +1,4 @@
 require 'rails_helper'
-include SessionHelper
 
 RSpec.describe UserController, type: :controller do
 	render_views
@@ -30,7 +29,6 @@ RSpec.describe UserController, type: :controller do
 				expect(id).to eql(1)
 				expect(User.find_by(:id => id).email).to eql(user[:email])
 				expect(response).to redirect_to(root_path)
-				expect(logged_in?).to be_truthy
 			end
 		end
 
@@ -59,10 +57,13 @@ RSpec.describe UserController, type: :controller do
 		context 'when signup details are correct' do
 			it 'creates the user and then logs the user in' do
 				request.env["HTTP_REFERER"] = "where_i_am_coming_from"
-				post :signup, user: { first_name: "Tijesunimi", last_name: "Petros",
+				post :signup, user: { first_name: "Tijesunimi",
+															last_name: "Petros",
 															email: "tijesunimi48@gmail.com",
 															password: "petros",
-															password_confirm: "petros"}
+															password_confirmation: "petros"
+														}
+
 				expect(response.body).to redirect_to(root_path)
 				expect(User.last.first_name).to eql("Tijesunimi")
 			end
@@ -71,9 +72,12 @@ RSpec.describe UserController, type: :controller do
 		context 'when signup details are not correct' do
 			it 'does not create user and redirects to the referer witha a flash message' do
 				request.env["HTTP_REFERER"] = "where_i_am_coming_from"
-				post :signup, user: { first_name: "Tijesunimi", last_name: "Pe",
-															email: "tijesunimi48@gmail.com", password: "petros",
-															password_confirm: "petros"}
+				post :signup, user: { first_name: "Tijesunimi",
+															last_name: "Pe",
+															email: "tijesunimi48@gmail.com",
+															password: "petros",
+															password_confirm: "petros"
+														}
 				expect(session["flash"]["flashes"]["errors"])
 								.to include("Last name is too short (minimum is 6 characters)")
 				expect(User.find_by(last_name: "Pe")).to be_nil

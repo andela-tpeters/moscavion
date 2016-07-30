@@ -6,8 +6,9 @@ class Booking < ActiveRecord::Base
   before_save :set_price
   validates :flight, allow_nil: false, presence: true
   validates :passengers, presence: true
-  accepts_nested_attributes_for :passengers, reject_if: :all_blank,
-                                             allow_destroy: true
+  accepts_nested_attributes_for :passengers, 
+                                reject_if: :all_blank,
+                                allow_destroy: true
 
   private
 

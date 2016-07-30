@@ -1,24 +1,16 @@
 require 'rails_helper'
 
 RSpec.describe Passenger, type: :model do
-	describe 'validations' do
-	  it 'raises error on wrong email format' do
-	  	expect { create(:passenger, :email => "tijesunimi.com") }
-	  						.to raise_error ActiveRecord::RecordInvalid
-		  expect { create(:passenger, :email => nil) }
-		  						.to raise_error ActiveRecord::RecordInvalid
-		end
+  describe 'belongs_to' do
+    it { should belong_to(:booking) }
+  end
 
-		it 'raises error for nil last name or first name' do
-			expect { create(:passenger, :first_name => '') }
-							.to raise_error ActiveRecord::RecordInvalid
-			expect { create(:passenger, :last_name => nil) }
-							.to raise_error ActiveRecord::RecordInvalid
-		end
-
-		it 'raises error for length  < 3' do
-			expect { create(:passenger, :first_name => "GO") }
-							.to raise_error ActiveRecord::RecordInvalid
-		end
-	end
+  describe 'validates' do
+    it { should validate_presence_of(:email) }
+    it { should validate_presence_of(:first_name) }
+    it { should validate_presence_of(:last_name) }
+    it { should validate_length_of(:last_name) }
+    it { should validate_length_of(:first_name) }
+    it { should allow_value("john@doe.com").for(:email) }
+  end
 end

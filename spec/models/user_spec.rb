@@ -1,36 +1,20 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-	describe 'validations for new users' do
-	  it 'raises error for input < 6 characters' do
-	  	expect { create(:user, :first_name => "Toms") }
-	  					.to raise_error ActiveRecord::RecordInvalid
-	  	expect { create(:user, :last_name => "Toms") }
-	  					.to raise_error ActiveRecord::RecordInvalid
-	  end
+  describe 'has_many' do
+    it { should have_many(:bookings) }
+  end
 
-	  it 'raises error for nil input' do
-	  	expect { create(:user, :first_name => nil) }
-	  					.to raise_error ActiveRecord::RecordInvalid
-	  	expect { create(:user, :first_name => nil) }
-	  					.to raise_error ActiveRecord::RecordInvalid
-	  end
-
-	  it 'raises error on nil password' do
-	  	expect { create(:user, :password => nil) }
-	  				.to raise_error ActiveRecord::RecordInvalid
-	  end
-
-	  it 'raises error for wrong email address format' do
-	  	expect { create(:user, :email => "tijesunimi.com") }
-	  						.to raise_error ActiveRecord::RecordInvalid
-	  end
-	end
-
-	describe 'password' do
-	  it 'returns password string of 60 characters' do
-	  	user = build(:user)
-	  	expect(user.password.length).to eql(60)
-	  end
-	end
+  describe 'validates' do
+    it { should validate_presence_of(:first_name) }
+    it { should validate_presence_of(:last_name) }
+    it { should validate_presence_of(:email) }
+    it { should have_secure_password }
+    it { should allow_value("john@doe.com").for(:email) }
+    it { should validate_length_of(:email) }
+    it { should validate_length_of(:first_name) }
+    it { should validate_length_of(:last_name) }
+    it { should validate_uniqueness_of(:email) }
+    it { should validate_confirmation_of(:password) }
+  end
 end
