@@ -43,6 +43,10 @@
 #map-box {
   min-height: 660px;
   padding-top: 160px;
+  @media only screen and (max-width: 768px) {
+    margin-top: 180px;
+    margin-bottom: 50px;
+  }
 }
 
 .content-wrapper {
