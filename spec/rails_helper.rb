@@ -13,7 +13,10 @@ Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
 ActiveRecord::Migration.maintain_test_schema!
 
 RSpec.configure do |config|
-
+  ActiveRecord::Base.logger.level = Logger::INFO
+  ActionController::Base.logger.level = Logger::ERROR
+  Rails.logger.level = Logger::ERROR
+  
   config.include FactoryGirl::Syntax::Methods
 
   config.before(:suite) { DatabaseCleaner.clean_with :truncation }
