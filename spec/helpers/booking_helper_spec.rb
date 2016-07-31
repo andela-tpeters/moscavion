@@ -1,15 +1,30 @@
 require 'rails_helper'
 
-# Specs in this file have access to a helper object that includes
-# the BookingHelper. For example:
-#
-# describe BookingHelper do
-#   describe "string concat" do
-#     it "concats two strings with spaces" do
-#       expect(helper.concat_strings("this","that")).to eq("this that")
-#     end
-#   end
-# end
 RSpec.describe BookingHelper, type: :helper do
-  # pending "add some examples to (or delete) #{__FILE__}"
+  let(:user) { create :user }
+
+  context 'when past user bookings empty' do
+    it 'should print No bookings yet' do
+      expect(display_bookings user.bookings)
+              .to include("No Bookings yet!")
+      expect(class_for_bookings user.bookings).to eql("header centered")
+    end
+  end
+
+  context 'when user has past bookings' do
+    it 'should render' do
+      booking = create :booking
+      user = booking.user
+      expect(display_bookings user.bookings)
+            .to include(booking.booking_code)
+      expect(class_for_bookings user.bookings).to eql("cards")
+    end
+  end
+
+  context 'when there is old email' do
+    it 'prints the old email' do
+      email = {send_email: Faker::Internet.email}
+      expect(old_email email).to eql(email[:send_email])
+    end
+  end
 end

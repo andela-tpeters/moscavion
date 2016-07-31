@@ -3,7 +3,7 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 $ ->
   password = $('#user_password')
-  confirm = $('#user_password_confirm')
+  confirm = $('#user_password_confirmation')
   submit = $("#signup-submit")
 
   @confirmPassword = ->

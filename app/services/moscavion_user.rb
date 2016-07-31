@@ -33,7 +33,12 @@ class MoscavionUser
 
   def validate_user(user, details)
     user_exist? user
-    user.authenticate(details[:password]) if @errors.empty?
+    if @errors.empty?
+      auth = user.authenticate(details[:password])
+      if !auth
+        @errors << "User email or password incorrect" and return
+      end
+    end
   end
 
   def user_exist?(user)

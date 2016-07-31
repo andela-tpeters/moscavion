@@ -9,7 +9,7 @@ module BookingHelper
     if bookings.empty?
       "<h1 class='ui header centered'>No Bookings yet!</h1>".html_safe
     else
-      render partial: "booking_item", collection: bookings, as: :item
+      render partial: "partials/booking_item", collection: bookings, as: :item
     end
   end
 

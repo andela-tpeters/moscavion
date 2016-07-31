@@ -5,7 +5,6 @@ class User < ActiveRecord::Base
   validates :first_name,
             :last_name,
             presence: true,
-            length: { in: 6..25 },
             allow_nil: false
 
   validates :email,
@@ -19,10 +18,5 @@ class User < ActiveRecord::Base
             confirmation: true,
             allow_nil: false,
             length: { minimum: 6 }
-
-   # validates :password_confirmation,
-   #          presence: true,
-   #          allow_nil: false,
-   #          length: { minimum: 6 }
 
 end

@@ -7,6 +7,5 @@ class Passenger < ActiveRecord::Base
   validates :first_name,
             :last_name,
             presence: true,
-            allow_blank: false,
-            length: { minimum: 3 }
+            allow_blank: false
 end

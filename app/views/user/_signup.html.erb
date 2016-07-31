@@ -7,15 +7,15 @@
     <%= form_for new_user, url: signup_url , html: { class: "ui form", id: "signup-form" } do |f| %>
       <div class="field">
         <%= f.label :first_name %>
-        <%= f.text_field :first_name, { required: true, minlength: 6 } %>
+        <%= f.text_field :first_name, { required: true } %>
       </div>
       <div class="field">
         <%= f.label :last_name %>
-        <%= f.text_field :last_name, { required: true, minlength: 6 } %>
+        <%= f.text_field :last_name, { required: true } %>
       </div>
       <div class="field">
         <%= f.label :email %>
-        <%= f.email_field :email, { required: true, minlength: 6 } %>
+        <%= f.email_field :email, { required: true } %>
       </div>
       <div class="field">
         <%= f.label :password %>

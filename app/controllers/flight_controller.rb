@@ -8,7 +8,6 @@ class FlightController < ApplicationController
   def search_params
     params.require(:query).permit(:departure_location,
                                   :arrival_location,
-                                  :passengers,
                                   :departure_date )
   end
 

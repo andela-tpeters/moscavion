@@ -4,6 +4,7 @@ var current_page = 1;
 
 var searchFlight = function() {
     var form_data = form_obj($("#search_flight_form").serializeArray());
+    // console.log(form_data);
     var result = "";
     if ($.isEmptyObject(form_data)) {
         flights = db.queryAll("flights");
@@ -13,6 +14,7 @@ var searchFlight = function() {
     $("#result_count").html(flights.length);
     paginate(1, flights);
     $(".ui.modal.flight-search-modal").modal("show");
+    return false;
 };
 
 var paginate = function(page, data) {
@@ -61,7 +63,7 @@ var paginate = function(page, data) {
 
 var booking_button = function(id) {
     var path = "/user/booking/book/" + id;
-    var button = "<a href='"+ path +"' class='ui basic button m-button'><i class='book icon'></i>Book</a>";
+    var button = "<a href='"+ path +"' class='ui basic button m-button book-btn'><i class='book icon'></i>Book</a>";
     return button;
 };
 
