@@ -2,7 +2,7 @@
   "name": "moscavion",
   "description": "book flights",
   "scripts": {
-    "postdeploy": "bundle exec rake db:migrate && bundle exec rake db:seed"
+    "postdeploy": "bundle exec rake db:migrate && bundle exec rake db:seed && bundle exec rake assets:precompile RAILS_ENV=production"
   },
   "env": {
     "LANG": {

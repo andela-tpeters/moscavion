@@ -1,14 +1,37 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Moscavion</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
-
-<%= yield %>
-
-</body>
+  <head>
+    <title>Moscavion</title>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  </head>
+  <body class="<%= controller_name %> <%= action_name %>">
+    <%= render "partials/header" %>
+    <div class="center aligned grid ui sixteen wide">
+      <div class="row">
+        <div class="ui grid fullwidth" id="map-box">
+        <%= login_msg %>
+        <%= error_msg %>
+        <%= notice %>
+          <div class="row">
+            <div class="column twelve wide centered content-wrapper">
+              <%= yield %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <%= render "partials/footer" %>
+    <%= render "partials/preloader" %>
+    <%= render "user/login_page" %>
+    <%= render "user/signup" %>
+    <%= render "partials/search_booking_form" %>
+    <%= render "partials/flight_search_modal" %>
+    <script src="//d3js.org/d3.v3.min.js"></script>
+    <script src="//d3js.org/topojson.v1.min.js"></script>
+    <script src="//d3js.org/queue.v1.min.js"></script>
+  </body>
 </html>

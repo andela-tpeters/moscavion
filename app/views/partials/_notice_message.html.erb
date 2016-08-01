@@ -1,0 +1,9 @@
+<% if flash[:notice] %>
+<div class="ui grid positive small message m-message four wide column flash">
+	<i class="close icon"></i>
+	<div class="content">
+		<i class="info icon"></i>
+		<%= flash[:notice] %>
+	</div>
+</div>
+<% end %>

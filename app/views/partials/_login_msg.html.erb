@@ -1,0 +1,12 @@
+<% if session[:user_id].nil? %>
+<div class="ui grid info mini message m-message flash_login">
+	<i class="close icon"></i>
+	<div class="content">
+		<div class="twelve wide column">
+			<i class="info circle icon"></i>
+			For access to your past booking reservations, please <a onclick="openSignin()" role="button">Sign In</a> /
+			<a role="button" onclick="openSignup()">Sign Up</a>
+		</div>
+	</div>
+</div>
+<% end %>

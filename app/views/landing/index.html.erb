@@ -1,19 +1,32 @@
-<div class="ui grid middle aligned one column" style="height: 100vh">
-  <div class="row">
-    <div class="column eight wide centered">
-      <div class="ui three column grid">
-        <div class="column five wide centered">
-          <h1 class="ui icon header">
-          <div class="ui active large inline loader"></div>
-          <div class="content" >
-            Moscavion
-            <p class="sub header">book your flight</p>
+<div class="ui one column grid">
+  <div id="map"></div>
+  <div class="content-container">
+    <div class="ui stackable grid middle aligned fullheight">
+      <div class="row">
+        <div class="eight wide column">
+          <div class="ui grid center aligned">
+            <div class="white">
+              <div class="ui sixteen column grid">
+                <div class="m-phrase">
+                  <span class="phrase">Book your flight....</span><br />
+                  <span class="name">
+                    <i class="angle double right icon"></i>
+                    Moscavion
+                    <i class="angle double left icon"></i>
+                  </span>
+                </div>
+              </div>
+            </div>
           </div>
-          </h1>
+        </div>
+        <div class="eight wide column">
+          <div class="ui grid center aligned">
+            <div class="">
+              <%= render "partials/flight_form", { departures: departures, arrivals: arrivals } %>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-    
   </div>
-  
 </div>

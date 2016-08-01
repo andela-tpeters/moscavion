@@ -1,0 +1,23 @@
+<div class="nested-fields row form ui">
+  <%= f.hidden_field :id %>
+  <div class="two fields">
+    <div class="field">
+      <%= f.label :first_name, "First Name" %>
+      <%= f.text_field :first_name, placeholder: "Firstname", required: true, :minimum => 6 %>
+    </div>
+    <div class="field">
+      <%= f.label :last_name %>
+      <%= f.text_field :last_name, placeholder: "Lastname", required: true %>
+    </div>
+  </div>
+  <div class="field">
+    <%= f.label :email %>
+    <%= f.email_field :email, placeholder: "Email", required: true %>
+  </div>
+  <div class="row">
+    <%= link_to_remove_association f, :class => "mini ui button basic m-button raised" do %>
+    <i class="remove user icon"></i> Trash
+    <% end %>
+  </div>
+  <div class="ui divider"></div>
+</div>

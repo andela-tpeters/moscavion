@@ -13,5 +13,5 @@
  *= require_tree .
  *= require_self
  */
- @import 'https://fonts.googleapis.com/css?family=Cairo|Lato:400i';
+ @import '//fonts.googleapis.com/css?family=Cairo|Lato:400i';
  

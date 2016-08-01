@@ -1,0 +1,39 @@
+<%= form_tag search_path, :method => "get", :id => "search_flight_form", :class => "ui form" do |f| %>
+<h1 class="ui dividing header" style="color: white">Search for Flight</h1>
+<div class="field">
+  <label style="color: white">Location</label>
+  <div class="field">
+    <select class="ui fluid dropdown" name="query[departure_location]">
+      <option value="">Departure</option>
+      <%= render partial: "partials/options_departures", collection: departures, as: :departures %>
+    </select>
+  </div>
+  <div class="field">
+    <select class="ui fluid dropdown" name="query[arrival_location]">
+      <option value="">Arrival</option>
+      <%= render partial: "partials/options_arrivals", collection: arrivals, as: :arrivals %>
+    </select>
+  </div>
+</div>
+<div class="field">
+  <label style="color: white">Departure Date: </label>
+  <div class="field">
+    <input type="date" name="query[departure_date]">
+  </div>
+</div>
+<div class="ui grid">
+  <div class="ten wide column">
+    <button class="ui basic button m-button" onclick="searchFlight()" type="button" id="search_flight">Search Flights</button>
+  </div>
+  <div class="six wide column">
+    <div class="ui icon basic button m-button" id="help_icon" data-content="Submit empty form to get all flights" data-variation="inverted">
+      <i class="help icon"></i>
+    </div>
+  </div>
+</div>
+<% end %>
+<script type="text/javascript">
+$("#help_icon").popup({
+position: "bottom center"
+});
+</script>

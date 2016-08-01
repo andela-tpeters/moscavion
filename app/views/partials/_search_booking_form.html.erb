@@ -1,0 +1,17 @@
+<div class="ui modal small manage-form">
+  <div class="header">
+    Search with your booking code to edit
+  </div>
+  <div class="content">
+    <%= form_tag manage_booking_url, :method => 'get', :class => "ui form" do %>
+    <div class="field">
+      <label>Booking Code</label>
+      <input type="text" name="booking[booking_code]" >
+    </div>
+    <button class="ui button">Find</button>
+    <% end %>
+  </div>
+  <div class="actions">
+    
+  </div>
+</div>

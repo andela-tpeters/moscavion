@@ -1,0 +1,27 @@
+// Place all the styles related to the booking controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.booking-main-container {
+	min-height: 660px;
+	width: 70%;
+	padding-top: 160px !important;
+	padding-bottom: 25px !important;
+}
+
+.fullwidth {
+	width: 100%;
+}
+
+.pad20 {
+	padding: 20px;
+}
+
+.bottom_margin_20 {
+	margin-bottom: 20px 
+}
+
+.passenger-btn {
+  @media only screen and (max-width: 513px) {
+    position: static !important;
+  }
+}

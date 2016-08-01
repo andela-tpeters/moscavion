@@ -11,20 +11,72 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160618000541) do
+ActiveRecord::Schema.define(version: 20160626205146) do
+
+  create_table "airlines", force: :cascade do |t|
+    t.string   "name"
+    t.string   "icao"
+    t.string   "iata"
+    t.integer  "airport_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "airports", force: :cascade do |t|
+    t.string   "name"
+    t.string   "city"
+    t.string   "country"
+    t.string   "iata"
+    t.string   "icao"
+    t.decimal  "latitude"
+    t.decimal  "longitude"
+    t.string   "tz_db"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "bookings", force: :cascade do |t|
+    t.integer  "flight_id"
+    t.integer  "user_id"
+    t.decimal  "price",        precision: 8, scale: 2
+    t.string   "booking_code"
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
+  end
 
   create_table "flights", force: :cascade do |t|
     t.datetime "departure_date"
-    t.string   "from"
-    t.string   "to"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
-    t.integer  "airports_id"
+    t.datetime "arrival_date"
+    t.integer  "airport_id"
+    t.integer  "airline_id"
+    t.integer  "flight_number"
+    t.string   "departure_location"
+    t.string   "arrival_location"
+    t.decimal  "price",              precision: 8, scale: 2
+    t.datetime "created_at",                                 null: false
+    t.datetime "updated_at",                                 null: false
   end
 
-  add_index "flights", ["airports_id"], name: "index_flights_on_airports_id"
+  add_index "flights", ["arrival_location"], name: "index_flights_on_arrival_location"
   add_index "flights", ["departure_date"], name: "index_flights_on_departure_date"
-  add_index "flights", ["from"], name: "index_flights_on_from"
-  add_index "flights", ["to"], name: "index_flights_on_to"
+  add_index "flights", ["departure_location"], name: "index_flights_on_departure_location"
+
+  create_table "passengers", force: :cascade do |t|
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "email"
+    t.integer  "booking_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "email"
+    t.string   "password_digest"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
 
 end
