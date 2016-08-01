@@ -1,5 +1,4 @@
 # Moscavion [![Coverage Status](https://coveralls.io/repos/github/andela-tpeters/moscavion/badge.svg?branch=develop)](https://coveralls.io/github/andela-tpeters/moscavion?branch=develop) [![Build Status](https://travis-ci.org/andela-tpeters/moscavion.svg?branch=develop)](https://travis-ci.org/andela-tpeters/moscavion)
-====
 
 A flight booking application. Very seamless and quick
 
@@ -8,10 +7,8 @@ Flight Management System that enables users to search for available flights and 
 
 You can access the online application here [Moscavion](http://moscavion.herokuapp.com)
 
-----
-
 ## Environment
-----
+
 ### System dependencies
 |        Backend                 |  Front-end                     |  Testing/Development
 |--------------------------------|--------------------------------|------------------------------------------------------------

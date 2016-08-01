@@ -33,9 +33,9 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
 end
 
-Capybara.register_driver :selenium do |app|
-  Capybara::Selenium::Driver.new(app, browser: :chrome)
-end
+# Capybara.register_driver :selenium do |app|
+#   Capybara::Selenium::Driver.new(app, browser: :chrome)
+# end
 
 Shoulda::Matchers.configure do |config|
   config.integrate do |with|
