@@ -27,4 +27,12 @@ RSpec.describe BookingHelper, type: :helper do
       expect(old_email email).to eql(email[:send_email])
     end
   end
+
+  context 'when flight has departed' do
+    it 'return disabled' do
+      flight = create :flight, departure_date: Faker::Time.backward(1)
+      booking = create :booking, flight: flight
+      expect(disable_edit booking).to eql("disabled")
+    end
+  end
 end

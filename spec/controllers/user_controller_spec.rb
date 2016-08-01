@@ -76,9 +76,11 @@ RSpec.describe UserController, type: :controller do
                               last_name: "Pe",
                               email: "tijesunimi48@gmail.com",
                               password: "petros",
-                              password_confirm: "petros"
+                              password_confirmation: "petro"
                             }
-        expect(response).to redirect_to(root_path)
+                            
+        expect(session["flash"]["flashes"]["errors"])
+                .to include("Password confirmation doesn't match Password")
       end
     end
   end

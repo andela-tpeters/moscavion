@@ -41,8 +41,6 @@ class BookingController < ApplicationController
   def delete
     if Booking.find_by(id: params[:id]).destroy
       flash[:notice] = "Reservation deleted Successfully"
-    else
-      flash[:errors] = "Reservation not deleted"
     end
     redirect_to :back
   end
