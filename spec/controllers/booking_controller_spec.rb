@@ -135,13 +135,26 @@ RSpec.describe BookingController, type: :controller do
     context 'when user inputs booking code' do
       let(:reservation) { Booking.last }
 
-      context 'invalid booking code' do
-        it 'flashes error on invalid booking code' do
-          get :manage, booking: { booking_code: "12h2y3us"}
-          expect(session["flash"]["flashes"]["errors"])
-                  .to include("Booking reservation not found")
-          expect(response).to redirect_to(root_path)
-        end
+      it 'flashes error on invalid booking code' do
+        get :manage, booking: { booking_code: "12h2y3us"}
+        expect(session["flash"]["flashes"]["errors"])
+                .to include("Booking reservation not found")
+        expect(response).to redirect_to(root_path)
+      end
+
+      it 'shows error for invalid passenger info' do
+        new_booking[:passengers_attributes] << {
+          first_name: "Kongas",
+          last_name: "Peters",
+          email: "Kongagmail.com"
+        }
+
+        new_booking[:id] = reservation.id
+        new_booking[:flight_id] = reservation.flight_id
+        new_booking[:booking_code] = reservation.booking_code
+        post :update, booking: new_booking, send_email: Faker::Internet.email
+        expect(session["flash"]["flashes"]["errors"])
+                .to include("Passengers email is invalid")
       end
     end
   end
