@@ -19,7 +19,8 @@ class MoscavionUser
   def signup(user_details)
     user = User.create user_details
     unless user.errors.empty?
-      @request.flash[:errors] = user.errors.full_messages and return
+      @request.flash[:errors] = user.errors.full_messages
+      return
     end
     @request.flash[:notice] = "Signup Successful"
     @request.session[:user_id] = user.id
@@ -35,15 +36,17 @@ class MoscavionUser
     user_exist? user
     if @errors.empty?
       auth = user.authenticate(details[:password])
-      if !auth
-        @errors << "User email or password incorrect" and return
+      unless auth
+        @errors << "User email or password incorrect"
+        return
       end
     end
   end
 
   def user_exist?(user)
     if user.nil?
-      @errors << "User not registered" and return false
+      @errors << "User not registered"
+      return false
     end
     true
   end

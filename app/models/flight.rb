@@ -1,7 +1,7 @@
 class Flight < ActiveRecord::Base
   belongs_to :airport
   belongs_to :airline
-  has_many 	:bookings
+  has_many  :bookings
   validates :departure_location,
             :arrival_location,
             :departure_date,
@@ -15,42 +15,41 @@ class Flight < ActiveRecord::Base
             numericality: true,
             allow_blank: false
 
-  scope :departures, -> {
-    select(:departure_location)
-    .distinct(:departure_location)
-    .where("departure_date >= ?", Time.now)
-    .order(departure_location: "asc")
-  }
+  def self.departures
+    select(:departure_location).
+      distinct(:departure_location).
+      where("departure_date >= ?", Time.now).
+      order(departure_location: "asc")
+  end
 
-  scope :arrivals, -> {
-    select(:arrival_location)
-    .distinct(:departure_location)
-    .where("departure_date >= ?", Time.now)
-    .order(arrival_location: "asc")
-  }
+  def self.arrivals
+    select(:arrival_location).
+      distinct(:departure_location).
+      where("departure_date >= ?", Time.now).
+      order(arrival_location: "asc")
+  end
 
-  scope :all_routes, -> {
+  def self.all_routes
     {
       departures: departures,
       arrivals: arrivals
     }
-  }
+  end
 
-  scope :routes_to_s, -> {
-    where("departure_date >= ?", Time.now)
-    .order(departure_date: "asc")
-    .map do |flight|
-    ["#{flight.departure_location} to #{flight.arrival_location}",
-      flight.id
-    ]
-    end
-  }
+  def self.routes_to_s
+    where("departure_date >= ?", Time.now).
+      order(departure_date: "asc").
+      map do |flight|
+        ["#{flight.departure_location} to #{flight.arrival_location}",
+         flight.id]
+      end
+  end
 
-  scope :search, -> (params) {
+  def self.search(params)
     if params.blank?
       where("departure_date > ?", Time.now)
     else
       where(params).where("departure_date > ?", Time.now)
     end
-  }
+  end
 end

@@ -1,6 +1,6 @@
 class BookingController < ApplicationController
-  before_action :check_session, :only => [:past_bookings]
-  before_action :check_email, :only => [:create, :update]
+  before_action :check_session, only: [:past_bookings]
+  before_action :check_email, only: [:create, :update]
 
   def past_bookings
     @bookings = Reservation.bookings current_user, params[:page]
@@ -8,17 +8,18 @@ class BookingController < ApplicationController
 
   def create
     booking = Reservation.create(request,
-                                booking_params,
-                                current_user,
-                                email)
+                                 booking_params,
+                                 current_user,
+                                 email)
     handle_redirect booking[:flight_id], true
   end
 
   def new
     unless flight_exist? params[:flight_id]
-      redirect_to root_path and return
+      redirect_to root_path
+      return
     end
-    data = Routes.new_booking request, params[:flight_id]
+    data = Routes.new_booking params[:flight_id]
     handle_booking_redirect request, data
   end
 
@@ -46,6 +47,7 @@ class BookingController < ApplicationController
   end
 
   private
+
   def booking_params
     params.require(:booking).permit(:flight_id,
                                     :user_id,
@@ -57,8 +59,7 @@ class BookingController < ApplicationController
                                       :last_name,
                                       :email,
                                       :_destroy
-                                      ]
-                                  )
+                                    ])
   end
 
   def search_params
@@ -69,13 +70,16 @@ class BookingController < ApplicationController
     flash[:errors] = "Pls provide recevier email" unless email
   end
 
-  def handle_redirect(pay_load, flag=false)
+  def handle_redirect(pay_load, flag = false)
     if errors && flag
-      redirect_to booking_page_path(pay_load) and return
+      redirect_to booking_page_path(pay_load)
+      return
     elsif errors && !flag
-      redirect_to manage_booking_path(pay_load) and return
+      redirect_to manage_booking_path(pay_load)
+      return
     elsif current_user
-      redirect_to your_bookings_path and return
+      redirect_to your_bookings_path
+      return
     else
       redirect_to root_path
     end
@@ -86,9 +90,13 @@ class BookingController < ApplicationController
   end
 
   def handle_booking_redirect(req, booking)
-    redirect_to root_path and return if booking.nil?
+    if booking.nil?
+      redirect_to root_path
+      return
+    end
     if Routes.departed?(req, booking[:flight])
-      redirect_to root_path and return
+      redirect_to root_path
+      return
     end
     render locals: booking
   end

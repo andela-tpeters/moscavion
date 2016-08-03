@@ -18,26 +18,28 @@ class UserController < ApplicationController
   end
 
   private
+
   def login_params
     params.require(:user_details).permit(:email, :password)
   end
 
   def user_params
     params.require(:user).permit(:first_name,
-                                  :last_name,
-                                  :email,
-                                  :password,
-                                  :password_confirmation)
+                                 :last_name,
+                                 :email,
+                                 :password,
+                                 :password_confirmation)
   end
 
   def user_blank?
     if prune_params.blank? || prune_params.size < 2
       flash[:errors] = "User details cannot be empty"
-      redirect_to :back and return
+      redirect_to :back
+      return
     end
   end
 
   def prune_params
-    login_params.delete_if { |key, value| value.blank? }
+    login_params.delete_if { |_key, value| value.blank? }
   end
 end
