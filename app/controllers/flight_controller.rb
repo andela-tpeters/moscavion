@@ -8,12 +8,12 @@ class FlightController < ApplicationController
   def search_params
     params.require(:query).permit(:departure_location,
                                   :arrival_location,
-                                  :departure_date )
+                                  :departure_date)
   end
 
   def prune_params
     return search_params if search_params.blank?
-    search_params.delete_if do |key, value|
+    search_params.delete_if do |_key, value|
       value.blank?
     end
   end

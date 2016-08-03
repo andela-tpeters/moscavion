@@ -8,6 +8,10 @@ AllCops:
     - "spec/spec_helper.rb"
     - "Guardfile"
     - "app/assets/stylesheets/*"
+    - "bin/*"
+    - "Rakefile"
+    - "app/assets/javascripts/localstoragedb.min.js"
+    - "lib/**/*"
   UseCache: false
 Style/CollectionMethods:
   Description: Preferred collection methods.
@@ -246,4 +250,6 @@ Lint/LiteralInCondition:
   Enabled: false
 Lint/LiteralInInterpolation:
   Description: Checks for literals used in interpolation.
+  Enabled: false
+Style/FrozenStringLiteralComment:
   Enabled: false

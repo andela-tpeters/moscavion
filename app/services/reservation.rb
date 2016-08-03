@@ -30,7 +30,7 @@ class Reservation
   end
 
   def self.create(request, properties, current_user, email = nil)
-    booking = self.new(request, properties, current_user, email).save
+    booking = new(request, properties, current_user, email).save
     return properties if booking.flash[:errors]
     booking.flash[:notice] = "Booking reservation Successful"
     properties
@@ -38,8 +38,8 @@ class Reservation
 
   def self.bookings(user, page)
     return [] if user.nil?
-    user.bookings.order(created_at: "desc")
-                  .paginate(page: page, per_page: 4)
+    user.bookings.order(created_at: "desc").
+      paginate(page: page, per_page: 4)
   end
 
   def self.get_booking(criteria = {})
@@ -57,10 +57,13 @@ class Reservation
     booking = get_booking booking_code: details[:booking_code]
     if booking.update details
       send_mail booking, email
-      request.flash[:notice] = "Booking Updated" and return
+      request.flash[:notice] = "Booking Updated"
+      return
     end
-    request.flash[:errors] = booking.errors.full_messages and
-    return unless booking.errors.empty?
+    unless booking.errors.empty?
+      request.flash[:errors] = booking.errors.full_messages
+      return
+    end
   end
 
   def self.prepare_for_edit(booking)

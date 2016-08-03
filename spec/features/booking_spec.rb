@@ -1,12 +1,11 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.feature "Booking", type: :feature do
-
   feature "" do
     let(:flight) { Flight.where("departure_date >= ?", Time.now).first }
-    
+
     before(:all) do
-      load "#{Rails.root}/spec/support/seed.rb" 
+      load "#{Rails.root}/spec/support/seed.rb"
       Seed.all
     end
 

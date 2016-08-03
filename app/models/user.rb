@@ -18,5 +18,4 @@ class User < ActiveRecord::Base
             confirmation: true,
             allow_nil: false,
             length: { minimum: 6 }
-
 end
