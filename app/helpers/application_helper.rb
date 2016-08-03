@@ -21,7 +21,7 @@ module ApplicationHelper
 
   def display_errors(msgs)
     if msgs.is_a? Array
-      msgs.map.with_index(1) { |x, index| "<li>#{index}. #{x}</li>"}.join
+      msgs.map.with_index(1) { |x, index| "<li>#{index}. #{x}</li>" }.join
     else
       msgs
     end

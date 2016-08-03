@@ -1,5 +1,5 @@
 class Routes
-  def self.new_booking(request, id)
+  def self.new_booking(id)
     flight = Flight.find_by(id: id)
     {
       flight: flight,

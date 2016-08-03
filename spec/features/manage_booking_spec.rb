@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.feature "Booking", type: :feature do
   feature "Manage", js: true do
-    let(:booking) { create :booking } 
+    let(:booking) { create :booking }
 
     scenario "when flight has not departed" do
       visit "/"

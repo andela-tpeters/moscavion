@@ -1,10 +1,9 @@
 require "rails_helper"
 
 RSpec.feature "Sign In", type: :feature do
-
   feature "User Logs in" do
     let(:user) { create :user }
-    
+
     scenario "with correct details", js: true do
       visit "/"
       click_on "Sign In"

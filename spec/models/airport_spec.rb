@@ -1,12 +1,12 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Airport, type: :model do
-  describe 'has_many' do
+  describe "has_many" do
     it { should have_many(:flights) }
     it { should have_many(:airlines) }
   end
 
-  describe 'validates' do
+  describe "validates" do
     it { should validate_presence_of(:name) }
     it { should validate_presence_of(:city) }
     it { should validate_presence_of(:country) }

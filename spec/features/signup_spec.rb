@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.feature "Sign Up", type: :feature do
   feature "User signs up", js: true do
-    scenario 'with correct information' do
+    scenario "with correct information" do
       visit "/"
       click_on "Sign Up"
       fill_in "user[first_name]", with: "John"
@@ -13,5 +13,5 @@ RSpec.feature "Sign Up", type: :feature do
       click_on "Submit"
       expect(page).to have_content "Signup Successful"
     end
-  end 
+  end
 end
