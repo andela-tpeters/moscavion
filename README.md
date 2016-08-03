@@ -1,4 +1,4 @@
-# Moscavion [![Coverage Status](https://coveralls.io/repos/github/andela-tpeters/moscavion/badge.svg)](https://coveralls.io/github/andela-tpeters/moscavion) [![Build Status](https://travis-ci.org/andela-tpeters/moscavion.svg?branch=develop)](https://travis-ci.org/andela-tpeters/moscavion)
+# Moscavion [![Coverage Status](https://coveralls.io/repos/github/andela-tpeters/moscavion/badge.svg)](https://coveralls.io/github/andela-tpeters/moscavion) [![Build Status](https://travis-ci.org/andela-tpeters/moscavion.svg?branch=develop)](https://travis-ci.org/andela-tpeters/moscavion) [![Code Climate](https://codeclimate.com/repos/57a1e49ede8c777bf00001b0/badges/488dd4ac1628dfadcdfd/gpa.svg)](https://codeclimate.com/repos/57a1e49ede8c777bf00001b0/feed)
 
 
 A flight booking application. Very seamless and quick
