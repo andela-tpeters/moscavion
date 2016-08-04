@@ -15,7 +15,7 @@ You can access the online application here [Moscavion](http://moscavion.herokuap
 |--------------------------------|--------------------------------|------------------------------------------------------------
 | Rails Framework                |   Semantic UI                  | RSpec + Factory Girl + Faker + Shoulda Matchers + SimpelCov
 | PostgreSQL                     |   jQuery                       | Capybara
-| Figaro                         |   Coffe Script                 | Letter Opener
+| Figaro                         |   Coffee Script                 | Letter Opener
 | Puma server                    |                                | Guard
 
 

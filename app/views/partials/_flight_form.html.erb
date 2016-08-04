@@ -3,13 +3,13 @@
 <div class="field">
   <label style="color: white">Location</label>
   <div class="field">
-    <select class="ui fluid dropdown" name="query[departure_location]">
+    <select class="ui fluid dropdown" name="query[departure_location]" onchange="formCheck()">
       <option value="">Departure</option>
       <%= render partial: "partials/options_departures", collection: departures, as: :departures %>
     </select>
   </div>
   <div class="field">
-    <select class="ui fluid dropdown" name="query[arrival_location]">
+    <select class="ui fluid dropdown" name="query[arrival_location]" onchange="formCheck()">
       <option value="">Arrival</option>
       <%= render partial: "partials/options_arrivals", collection: arrivals, as: :arrivals %>
     </select>
@@ -32,8 +32,3 @@
   </div>
 </div>
 <% end %>
-<script type="text/javascript">
-$("#help_icon").popup({
-position: "bottom center"
-});
-</script>

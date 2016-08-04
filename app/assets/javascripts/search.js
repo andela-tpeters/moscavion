@@ -4,7 +4,6 @@ var current_page = 1;
 
 var searchFlight = function() {
     var form_data = form_obj($("#search_flight_form").serializeArray());
-    // console.log(form_data);
     var result = "";
     if ($.isEmptyObject(form_data)) {
         flights = db.queryAll("flights");
@@ -85,3 +84,21 @@ var slice_word = function(word) {
 var table_cell = function(value) {
     return "<td>" + value + "</td>";
 };
+
+var formCheck = function() {
+    var dloc = $("[name='query[departure_location]']");
+    var aloc = $("[name='query[arrival_location]']");
+    if(dloc.val().length == 0 && aloc.val().length == 0) {
+        $("button#search_flight").removeClass("disabled");
+    } else if(dloc.val() == aloc.val()) {
+        alert("Departure can't be the same as Arrival");
+        $("button#search_flight").addClass("disabled");
+    } else {
+        $("button#search_flight").removeClass("disabled");
+    }
+}
+
+$("#help_icon").popup({
+    position: "bottom center"
+});
+
