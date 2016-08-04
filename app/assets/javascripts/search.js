@@ -85,20 +85,17 @@ var table_cell = function(value) {
     return "<td>" + value + "</td>";
 };
 
-var formCheck = function() {
+var formCheck = function(elem) {
     var dloc = $("[name='query[departure_location]']");
     var aloc = $("[name='query[arrival_location]']");
-    if(dloc.val().length == 0 && aloc.val().length == 0) {
-        $("button#search_flight").removeClass("disabled");
-    } else if(dloc.val() == aloc.val()) {
-        alert("Departure can't be the same as Arrival");
-        $("button#search_flight").addClass("disabled");
-    } else {
-        $("button#search_flight").removeClass("disabled");
+    if((dloc.val().length > 0 && aloc.val().length > 0) && (dloc.val() == aloc.val())) {
+        $('.cookie.nag').nag('show');
     }
 }
 
 $("#help_icon").popup({
     position: "bottom center"
 });
+
+
 
