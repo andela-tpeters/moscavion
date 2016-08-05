@@ -36,7 +36,7 @@ RSpec.describe FlightController, type: :controller do
     end
   end
 
-  describe "search method" do
+  describe "search" do
     context "when query is blank" do
       it "returns all flights" do
         visit_search
@@ -45,7 +45,7 @@ RSpec.describe FlightController, type: :controller do
     end
 
     context "when query has nil params" do
-      it "returns all flights on nil query params" do
+      it "returns all flights" do
         get :search, query: { departure_location: nil }
         expect(response.content_type).to eql("application/json")
       end

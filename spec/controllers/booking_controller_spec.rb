@@ -21,12 +21,20 @@ RSpec.describe BookingController, type: :controller do
     post :create, booking: new_booking, send_email: "tijesunimi@gmail.com"
   end
 
-  describe "session" do
+  describe "#logged_in?" do
     context "when a user is not logged in" do
       it "should return false logged_in?" do
         post_new
         expect(controller.send(:logged_in?)).to be_falsey
         expect(response).to redirect_to(root_path)
+      end
+    end
+
+    context "when a user is logged in" do
+      it "should return true" do
+        session[:user_id] = 1
+        post_new
+        expect(controller.send(:logged_in?)).to be_truthy
       end
     end
   end
@@ -36,7 +44,7 @@ RSpec.describe BookingController, type: :controller do
       session[:user_id] = 1
     end
 
-    context "when user fills form new booking" do
+    context "when user fills correctly" do
       it "should save booking and redirect to your_bookings_path" do
         post_new
         expect(response).to redirect_to(your_bookings_path)
@@ -51,9 +59,28 @@ RSpec.describe BookingController, type: :controller do
         expect { post_new }.to raise_error ActionController::ParameterMissing
       end
     end
+
+    context "when flight id does not exist" do
+      it "redirects to root_path" do
+        get :new, flight_id: 50_000
+        expect(response).to redirect_to(root_path)
+        expect(session["flash"]["flashes"]["errors"]).
+          to include("Flight does not exist")
+      end
+    end
+
+    context "when flight exists" do
+      render_views
+      it "renders new page" do
+        flight = Flight.where("departure_date >= ?", Time.now).first
+        get :new, flight_id: flight.id
+        expect(response).to render_template(:new)
+        expect(response.body).to include(flight.departure_location)
+      end
+    end
   end
 
-  describe "user bookings" do
+  describe "#past_bookings" do
     before do
       user_ids = [1, 2, 1, 3, 4, 2, 3, 2, 1, 1]
       user_ids.each do |id|
@@ -84,45 +111,30 @@ RSpec.describe BookingController, type: :controller do
     end
   end
 
-  describe "booking <> passengers" do
-    it "saves passenger for booking" do
-      session[:user_id] = 1
-      new_booking[:passengers_attributes] = [{ first_name: "Tijesunimi",
-                                               last_name: "Peters",
-                                               email: "tijesunimi@gmail.com" }]
-      post_new
-      passenger = Passenger.find_by(booking_id: 1)
-      expect(passenger.first_name).to eql("Tijesunimi")
-    end
-
-    it "does not save passenger for booking" do
-      session[:user_id] = 1
-      new_booking[:passengers_attributes] = []
-      post_new
-      expect(Passenger.all.size).to eql(0)
-    end
-
-    context "when flight id does not exist" do
-      it "redirect_to root_path" do
-        get :new, flight_id: 50_000
-        expect(response).to redirect_to(root_path)
-        expect(session["flash"]["flashes"]["errors"]).
-          to include("Flight does not exist")
+  describe "#create" do
+    context "when details are correct" do
+      it "saves booking" do
+        session[:user_id] = 1
+        new_booking[:passengers_attributes] = [{ first_name: "Tijesunimi",
+                                                 last_name: "Peters",
+                                                 email: "tijesunimi@gmail.com" }]
+        post_new
+        passenger = Passenger.find_by(booking_id: 1)
+        expect(passenger.first_name).to eql("Tijesunimi")
       end
     end
 
-    context "when flight exists" do
-      render_views
-      it "renders create page" do
-        flight = Flight.where("departure_date >= ?", Time.now).first
-        get :new, flight_id: flight.id
-        expect(response).to render_template(:new)
-        expect(response.body).to include(flight.departure_location)
+    context "when details are not correct" do
+      it "does not save booking" do
+        session[:user_id] = 1
+        new_booking[:passengers_attributes] = []
+        post_new
+        expect(Passenger.all.size).to eql(0)
       end
     end
   end
 
-  describe "manage" do
+  describe "#manage" do
     before do
       new_booking[:flight_id] = Flight.offset(rand(Flight.count)).first
       new_booking[:passengers_attributes] = [{ first_name: "Kongas",
