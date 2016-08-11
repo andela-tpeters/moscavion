@@ -8,6 +8,13 @@ Flight Management System that enables users to search for available flights and 
 
 You can access the online application here [Moscavion](http://moscavion.herokuapp.com)
 
+## Features
+1. Flight search
+2. Flight booking
+3. Managing reservation
+4. Access to past bookings for registered users
+5. Email notification
+
 ## Environment
 
 ### System dependencies
@@ -59,3 +66,19 @@ $ rails s
 ```
 Now visit `http://localhost:3000` to view the application on your prefered web browser.
 
+# How to run the tests
+After cloning the repository, cd into the directory and run:
+
+```
+$ bundle exec rspec
+```
+
+# Limitations
+1. No payment integration
+
+# Contributing
+1. Fork it: Fork the moscavion project
+2. Create your feature branch (git checkout -b my-new-feature)
+3. Commit your changes (git commit -am 'Add some feature')
+4. Push to the branch (git push origin my-new-feature)
+5. Create a new Pull Request
