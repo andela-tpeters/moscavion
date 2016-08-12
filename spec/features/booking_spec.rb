@@ -28,7 +28,7 @@ RSpec.feature "Booking", type: :feature do
         fill_in "Email", with: Faker::Internet.email
       end
       click_on "Confirm Info"
-
+      sleep 1.5
       within ".confirmation-modal" do
         click_on "OK"
       end

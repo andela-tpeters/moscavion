@@ -7,10 +7,12 @@ class BookingController < ApplicationController
   end
 
   def create
-    booking = Reservation.create(request,
+    booking = Reservation.create(
+                                 request,
                                  booking_params,
                                  current_user,
-                                 email)
+                                 email
+                                 )
     handle_redirect booking[:flight_id], true
   end
 
@@ -49,7 +51,8 @@ class BookingController < ApplicationController
   private
 
   def booking_params
-    params.require(:booking).permit(:flight_id,
+    params.require(:booking).permit(
+                                    :flight_id,
                                     :user_id,
                                     :booking_code,
                                     :price,
@@ -59,7 +62,8 @@ class BookingController < ApplicationController
                                       :last_name,
                                       :email,
                                       :_destroy
-                                    ])
+                                    ]
+                                  )
   end
 
   def search_params

@@ -44,25 +44,31 @@ var paginate = function(page, data) {
     }
 
     $("#flights_results > table > tbody").empty();
-    for (var i = offset; i < limit; i+=1) {
-        var flight_data = "";
-        if (!$.isEmptyObject(data[i])) {
-            $("#flights_results > table > tbody").append(function() {
-                flight_data += table_cell(data[i].id);
-                flight_data += table_cell(data[i].departure_location);
-                flight_data += table_cell(data[i].arrival_location);
-                flight_data += table_cell(new Date(data[i].departure_date).toLocaleString());
-                flight_data += table_cell("$ " + data[i].price);
-                flight_data += table_cell(booking_button(data[i].id));
-                return "<tr>" + flight_data + "</tr>";
-            });
+    if ($.isEmptyObject(data)) {
+        $("#flights_results > table > tbody").append(function() {
+            return "<tr><td colspan='6'><h1 class='ui center aligned'>No flight(s) found</h1></td></tr>";
+        });
+    } else {
+        for (var i = offset; i < limit; i += 1) {
+            var flight_data = "";
+            if (!$.isEmptyObject(data[i])) {
+                $("#flights_results > table > tbody").append(function() {
+                    flight_data += table_cell(data[i].id);
+                    flight_data += table_cell(data[i].departure_location);
+                    flight_data += table_cell(data[i].arrival_location);
+                    flight_data += table_cell(new Date(data[i].departure_date).toLocaleString());
+                    flight_data += table_cell("$ " + data[i].price);
+                    flight_data += table_cell(booking_button(data[i].id));
+                    return "<tr>" + flight_data + "</tr>";
+                });
+            }
         }
     }
 };
 
 var booking_button = function(id) {
     var path = "/user/booking/book/" + id;
-    var button = "<a href='"+ path +"' class='ui basic button m-button book-btn'><i class='book icon'></i>Book</a>";
+    var button = "<a href='" + path + "' class='ui basic button m-button book-btn'><i class='book icon'></i>Book</a>";
     return button;
 };
 
@@ -88,7 +94,7 @@ var table_cell = function(value) {
 var formCheck = function(elem) {
     var dloc = $("[name='query[departure_location]']");
     var aloc = $("[name='query[arrival_location]']");
-    if((dloc.val().length > 0 && aloc.val().length > 0) && (dloc.val() == aloc.val())) {
+    if ((dloc.val().length > 0 && aloc.val().length > 0) && (dloc.val() == aloc.val())) {
         $('.cookie.nag').nag('show');
     }
 }
@@ -96,6 +102,3 @@ var formCheck = function(elem) {
 $("#help_icon").popup({
     position: "bottom center"
 });
-
-
-

@@ -24,11 +24,13 @@ class UserController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:first_name,
+    params.require(:user).permit(
+                                 :first_name,
                                  :last_name,
                                  :email,
                                  :password,
-                                 :password_confirmation)
+                                 :password_confirmation
+                                )
   end
 
   def user_blank?

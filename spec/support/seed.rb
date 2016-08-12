@@ -36,7 +36,7 @@ class Seed
 
   def self.flights
     File.open("./db/routes.dat", "r") do |file|
-      (1..300).each do |number|
+      (1..200).each do |number|
         line_content = file.readline.shellsplit[0].split(",")
         arrival_id = 301 - number
         _depart_airport = Airport.find_by(id: line_content[3])
