@@ -11,7 +11,8 @@ RSpec.feature "Booking", type: :feature do
       click_on "Find"
       fill_in "send_email", with: Faker::Internet.email
       click_on "Confirm Info"
-      click_on "OK"
+      # find(".confirmation-modal").click_on "OK"
+      find(".submit-confirmation").click
       click_on "Submit"
       expect(page).to have_content "Booking Updated"
     end

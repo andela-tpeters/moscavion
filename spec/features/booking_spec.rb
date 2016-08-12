@@ -29,9 +29,10 @@ RSpec.feature "Booking", type: :feature do
       end
       click_on "Confirm Info"
       sleep 1.5
-      within ".confirmation-modal" do
-        click_on "OK"
-      end
+      # binding.pry
+      # within ".confirmation-modal" do
+      find(".submit-confirmation").click
+      # end
 
       click_button "Submit"
       assert_text "Booking reservation Successful"

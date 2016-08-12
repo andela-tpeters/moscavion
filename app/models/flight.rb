@@ -18,14 +18,12 @@ class Flight < ActiveRecord::Base
   def self.departures
     select(:departure_location).
       distinct(:departure_location).
-      where("departure_date >= ?", Time.now).
       order(departure_location: "asc")
   end
 
   def self.arrivals
     select(:arrival_location).
       distinct(:departure_location).
-      where("departure_date >= ?", Time.now).
       order(arrival_location: "asc")
   end
 

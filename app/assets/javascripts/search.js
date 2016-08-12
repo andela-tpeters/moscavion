@@ -2,19 +2,39 @@ var db = localStorageDB("flight_db");
 var flights;
 var current_page = 1;
 
-var searchFlight = function() {
-    var form_data = form_obj($("#search_flight_form").serializeArray());
-    var result = "";
-    if ($.isEmptyObject(form_data)) {
-        flights = db.queryAll("flights");
+var searchFlight = function(allFlights = false) {
+    if (allFlights) {
+        flights = getFlights();
     } else {
-        flights = db.queryAll("flights", { query: form_data });
+        var form_data = form_obj($("#search_flight_form").serializeArray());
+        var result = "";
+        if ($.isEmptyObject(form_data)) {
+            flights = [];
+        } else {
+            flights = getFlights(form_data);
+        }
     }
     $("#result_count").html(flights.length);
     paginate(1, flights);
     $(".ui.modal.flight-search-modal").modal("show");
     return false;
 };
+
+var getFlights = function(query = {}) {
+    if ($.isEmptyObject(query)) {
+        return db.queryAll("flights", {
+            query: function(row) {
+                if (new Date(row.departure_date) > new Date()) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        });
+    } else {
+        return db.queryAll("flights", { query: query });
+    }
+}
 
 var paginate = function(page, data) {
     page = page || 1;
