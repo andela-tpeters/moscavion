@@ -20,7 +20,6 @@ gem 'figaro'
 gem 'rails_12factor'
 
 group :development, :test do
-  gem 'pry'
   gem 'byebug'
   gem 'rspec-rails'
   gem 'capybara'
